@@ -5,16 +5,31 @@
       <h1>日常记账</h1>
     </header>
     <main><router-view /></main>
-    <footer>
+    <footer v-if="$route.path !== '/welcome/4'">
       <div class="fake">fake</div>
-      <div class="pass">跳过</div>
-      <div class="next">下一页</div>
+      <div class="pass" @click="$router.push('/start')">跳过</div>
+      <div class="next" @click="nextPageClick">下一页</div>
+    </footer>
+    <footer v-else>
+      <div class="fake">fake</div>
+      <div class="fake">跳过</div>
+      <div class="pass" @click="$router.push('/start')">完成</div>
     </footer>
   </div>
 </template>
 
 <script lang="ts" setup>
 import logo from '../assets/icons/mangosteen.svg'
+import { useRoute, useRouter } from 'vue-router'
+
+const route = useRoute()
+const router = useRouter()
+const nextPageClick = () => {
+  const path = route.path
+  const num =  Number(path.split('/').pop())
+  const newPath = path.slice(0, path.length - 1) + (num + 1).toString()
+  router.push(newPath)
+}
 </script>
 <style scoped lang="scss">
 .welcome{
