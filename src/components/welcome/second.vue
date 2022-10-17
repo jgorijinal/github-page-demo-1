@@ -7,5 +7,4 @@ import Card from './components/card.vue'
 import cloud from '../../assets/icons/cloud.svg'
 </script>
 <style scoped lang="scss">
-
 </style>

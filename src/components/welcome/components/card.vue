@@ -27,6 +27,7 @@ const props = defineProps<CardProps>()
   align-items: center;
   height: 100%;
   border-radius: 6px;
+  margin:20px 20px 0  20px;
   .card {
   display: flex;
   flex-direction: column;

@@ -4,7 +4,13 @@
       <img :src="logo" alt="">
       <h1>日常记账</h1>
     </header>
-    <main><router-view /></main>
+    <main>
+      <router-view v-slot="{ Component }">
+        <transition name="fade">
+          <component :is="Component" />
+          </transition>
+        </router-view>
+    </main>
     <footer v-if="$route.path !== '/welcome/4'">
       <div class="fake">fake</div>
       <div class="pass" @click="$router.push('/start')">跳过</div>
@@ -26,8 +32,8 @@ const route = useRoute()
 const router = useRouter()
 const nextPageClick = () => {
   const path = route.path
-  const num =  Number(path.split('/').pop())
-  const newPath = path.slice(0, path.length - 1) + (num + 1).toString()
+  const pathNum =  Number(path.split('/').pop())
+  const newPath = path.slice(0, path.length - 1) + (pathNum + 1).toString()
   router.push(newPath)
 }
 </script>
@@ -52,7 +58,8 @@ const nextPageClick = () => {
   }
   main {
     flex-grow:1;
-    padding:20px 20px 0 20px;
+    position: relative;
+    margin-bottom:20px;
   }
   footer{
     flex-shrink: 0;
@@ -72,5 +79,25 @@ const nextPageClick = () => {
       }
     }
   }
+}
+.fade-move,
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.25s ease-in;
+  width:100%;
+  height:100%;
+}
+.fade-enter-from {
+  transform:translateX(100vw);
+  opacity:0;
+}
+.fade-leave-to {
+  transform:translateX(-100vw);
+  opacity:0;
+}
+.fade-leave-active{
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 </style>
