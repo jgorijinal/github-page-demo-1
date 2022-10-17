@@ -3,8 +3,7 @@ import Welcome from '../views/welcome.vue'
 export const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: 'home',
-    component:() => import('../views/home.vue')
+    redirect:'/welcome/1',
   },
   {
     path: '/welcome',
