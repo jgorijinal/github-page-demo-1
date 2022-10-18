@@ -7,8 +7,8 @@
 import addSvg from '../assets/icons/add.svg'
 </script>
 <style lang="scss" scoped>
-$btn-bg:#7499f8;
-$btn-bg-hover:#3d72f7;
+$btn-bg:#3465e0;
+$btn-bg-hover:#0433ab;
   .eren-float-button {
     display: inline-block;
     height:56px;
@@ -20,8 +20,8 @@ $btn-bg-hover:#3d72f7;
     align-items: center;
     transition: all 0.4s ease;
     position:fixed;
-    bottom:16px;
     right:16px;
+    bottom:16px;
     &:hover,&:active {
       background-color:$btn-bg-hover ;
     }
