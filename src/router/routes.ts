@@ -14,5 +14,9 @@ export const routes: RouteRecordRaw[] = [
       { path: '3', component:() => import('../components/welcome/third.vue') },
       { path: '4', component:() => import('../components/welcome/fourth.vue') }
     ]
+  },
+  {
+    path: '/start',
+    component: ()=>import('../views/start.vue')
   }
 ]
