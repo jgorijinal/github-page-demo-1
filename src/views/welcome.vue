@@ -72,7 +72,7 @@ watch(direction, () => {
   main {
     flex-grow: 1;
     position: relative;
-    margin-bottom: 20px;
+    margin:20px 20px 0 20px; /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!**/
   }
   footer {
     flex-shrink: 0;
@@ -100,7 +100,7 @@ watch(direction, () => {
 .fade-move,
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 0.25s ease-in;
+  transition: all .4s ease-in;
   width: 100%;
   height: 100%;
 }
