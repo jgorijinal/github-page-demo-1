@@ -1,10 +1,10 @@
 <template>
-  <div>
     <e-button class="button" @click="handleClick">开始记账</e-button>
-  </div>
+    <float-button />
 </template>
 <script setup lang="ts">
 import EButton from '../components/button.vue'
+import FloatButton from '../components/floatButton.vue'
 const handleClick = () => {
   console.log('hi')
 }
