@@ -5,6 +5,10 @@
         <img :src="menuSvg" alt="" class="left-icon-img">
       </template>
     </nav-bar>
+    <div class="start-content">
+      <img :src="pigSvg" alt="">
+      <span>点击下方 ↓ 按钮可以随时记账</span>
+    </div>
     <e-button class="button" @click="handleClick">开始记账</e-button>
     <float-button />
 </template>
@@ -12,6 +16,7 @@
 import EButton from '../components/button.vue'
 import FloatButton from '../components/floatButton.vue'
 import menuSvg from '../assets/icons/menu.svg'
+import pigSvg from '../assets/icons/pig.svg'
 import navBar from '../components/navBar.vue'
 const handleClick = () => {
   console.log('hi')
@@ -31,5 +36,15 @@ const clickRightHandle = () => {
 .left-icon-img {
   width:1.2em;
   height:1.2em;
+}
+.start-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 80px;
+  > span {
+    margin-top:16px;
+  }
 }
 </style>

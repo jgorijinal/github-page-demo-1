@@ -59,6 +59,7 @@ const clickRight = () => {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition:all 0.4s ease;
     &-icon {
       margin-right:6px;
       display: flex;
