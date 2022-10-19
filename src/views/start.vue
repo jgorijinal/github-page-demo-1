@@ -1,5 +1,6 @@
 <template>
   <!--导航栏-->
+  <div class="container">
     <nav-bar left-text="日常记账"
     @click-left="clickLeftHandle" @click-right="clickRightHandle">
       <template #leftIcon>
@@ -36,6 +37,7 @@
         </li>
       </ul>
     </Overlay>
+  </div>
 </template>
 <script setup lang="ts">
 // svg
@@ -71,6 +73,9 @@ const closeOverlayHandle = () => {
 
 </script>
 <style lang="scss" scoped>
+.container {
+  height:100vh;
+}
 .button {
   display: block;
   margin:10px;
