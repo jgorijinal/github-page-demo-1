@@ -1,25 +1,53 @@
 <template>
+  <!--导航栏-->
     <nav-bar left-text="日常记账"
     @click-left="clickLeftHandle" @click-right="clickRightHandle">
       <template #leftIcon>
         <img :src="menuSvg" alt="" class="left-icon-img">
       </template>
     </nav-bar>
+    <!--中间主要内容-->
     <div class="start-content">
       <img :src="pigSvg" alt="">
       <span>点击下方 ↓ 按钮可以随时记账</span>
     </div>
+    <!--记账按钮-->
     <e-button class="button" @click="handleClick">开始记账</e-button>
+    <!--悬浮按钮-->
     <float-button />
-    <Overlay :visible="overlayVisible" @close-overlay="closeOverlayHandle"/>
+    <!--遮罩层-->
+    <Overlay :visible="overlayVisible" @close-overlay="closeOverlayHandle">
+      <ul class="menu-nav">
+        <li class="menu-nav-item">
+          <img :src="tongjiSvg" alt="">
+          <span>统计图表</span>
+        </li>
+        <li class="menu-nav-item">
+          <img :src="fenleiSvg" alt="">
+          <span>自定义分类</span>
+        </li>
+        <li class="menu-nav-item">
+          <img :src="exportSvg" alt="">
+          <span>导出数据</span>
+        </li>
+        <li class="menu-nav-item">
+          <img :src="tixingSvg" alt="">
+          <span>记账提醒</span>
+        </li>
+      </ul>
+    </Overlay>
 </template>
 <script setup lang="ts">
 // svg
 import menuSvg from '../assets/icons/menu.svg'
 import pigSvg from '../assets/icons/pig.svg'
-import navBar from '../components/navBar.vue'
+import tongjiSvg from '../assets/icons/tongji.svg'
+import fenleiSvg from '../assets/icons/fenlei.svg'
+import exportSvg from '../assets/icons/export.svg'
+import tixingSvg from '../assets/icons/tixing.svg'
 // 组件
 import EButton from '../components/button.vue'
+import navBar from '../components/navBar.vue'
 import FloatButton from '../components/floatButton.vue'
 import Overlay from '../components/overlay.vue'
 
@@ -59,6 +87,26 @@ const closeOverlayHandle = () => {
   padding: 80px;
   > span {
     margin-top:16px;
+  }
+}
+.menu-nav {
+    display: flex;
+    flex-direction: column;
+  &-item {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    padding:8px 10px;
+    transition: all 0.25s ease;
+    cursor:pointer;
+    &:hover,&:active {
+      background-color: antiquewhite;
+    }
+    img{
+      width:1.8em;
+      height:1.8em;
+      margin-right: 8px;
+    }
   }
 }
 </style>
