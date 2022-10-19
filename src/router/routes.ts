@@ -18,5 +18,15 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/start',
     component: ()=>import('../views/start.vue')
+  },
+  {
+    path: '/item',
+    redirect:'/item/create',
+    children: [
+      {
+        path: 'create',
+        component:()=>import('../views/item/itemCreate.vue')
+      }
+    ]
   }
 ]

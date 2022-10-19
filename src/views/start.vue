@@ -54,8 +54,10 @@ import FloatButton from '../components/floatButton.vue'
 import Overlay from '../components/overlay.vue'
 
 import { ref } from 'vue'
+import { useRouter} from 'vue-router'
+const router = useRouter()
 const handleClick = () => {
-  console.log('hi')
+  router.push('/item/create')
 }
 const clickLeftHandle = () => {
   // console.log('点击了 navBar的左侧区域')
