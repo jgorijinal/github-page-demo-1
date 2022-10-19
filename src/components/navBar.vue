@@ -48,7 +48,7 @@ const clickRight = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  height:46px;
+  height:50px;
   .eren-navBar-left{
     position:absolute;
     // 使用 绝对定位 撑满区域(下面三行), 并加上 左右padding 增加区域宽度

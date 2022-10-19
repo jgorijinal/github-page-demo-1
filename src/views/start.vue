@@ -11,22 +11,36 @@
     </div>
     <e-button class="button" @click="handleClick">开始记账</e-button>
     <float-button />
+    <Overlay :visible="overlayVisible" @close-overlay="closeOverlayHandle"/>
 </template>
 <script setup lang="ts">
-import EButton from '../components/button.vue'
-import FloatButton from '../components/floatButton.vue'
+// svg
 import menuSvg from '../assets/icons/menu.svg'
 import pigSvg from '../assets/icons/pig.svg'
 import navBar from '../components/navBar.vue'
+// 组件
+import EButton from '../components/button.vue'
+import FloatButton from '../components/floatButton.vue'
+import Overlay from '../components/overlay.vue'
+
+import { ref } from 'vue'
 const handleClick = () => {
   console.log('hi')
 }
 const clickLeftHandle = () => {
-  console.log('点击了 navBar的左侧区域')
+  // console.log('点击了 navBar的左侧区域')
+  overlayVisible.value = !overlayVisible.value
 }
 const clickRightHandle = () => {
   console.log('点击了 navBar的右侧区域')
 }
+// 遮罩层
+const overlayVisible = ref(false)
+
+const closeOverlayHandle = () => {
+  overlayVisible.value = false
+}
+
 </script>
 <style lang="scss" scoped>
 .button {
