@@ -42,7 +42,8 @@ const clickRight = () => {
 <style lang="scss" scoped>
 .eren-navBar-content {
   width:100%;
-  background-image: linear-gradient(to bottom, #002ea6, #3667e3);
+  // background-image: linear-gradient(to bottom, #002ea6, #3667e3);
+  background-color: #3465e0;
   color:white;
   position:relative;
   display: flex;

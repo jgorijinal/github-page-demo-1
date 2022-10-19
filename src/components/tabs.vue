@@ -1,9 +1,9 @@
 <template>
   <div class="eren-tabs">
-    <ul>
+    <ul class="eren-tabs-tab">
       <li v-for="item in arr" 
-        :key="item.props?.name" 
-        class="eren-tab" 
+        :key="item.props?.name"
+        class="eren-tabs-tab-name"
         :class="{'active':item.props?.name === active}"
         @click="clickTab(item)"
       >{{item.props?.name}}</li>
@@ -13,7 +13,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { useSlots,computed } from 'vue'
+import { useSlots, computed } from 'vue'
 import tab from './tab.vue'
 
 const slots = useSlots()
@@ -44,7 +44,31 @@ const clickTab = (item:any) => {
 <style lang="scss" scoped>
 .eren-tabs{
   .active {
-     background-color: antiquewhite;
+    transition: all 0.25s ease;
+    position:relative;
+    &::after {
+      content:'';
+      display: block;
+      position:absolute;
+      bottom:0;
+      left: 0;
+      right:0;
+      height: 4px;
+      background-color: white;
+    }
+  }
+  &-tab {
+    background-color: #273c75;
+    display:flex;
+    font-size: px;
+    &-name {
+      color:white;
+      padding:8px 16px;
+      flex-grow:1;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
 </style>
