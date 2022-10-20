@@ -62,7 +62,7 @@ const buttons = [
     }
   }
   .pad{
-    font-size: 18px;
+    font-size: 16px;
     display: flex;
     flex-wrap: wrap;
     border-top:1px solid rgb(225, 224, 224);

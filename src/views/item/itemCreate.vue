@@ -29,7 +29,6 @@ import fanhuiSvg from '../../assets/icons/fanhui.svg'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-
 const router = useRouter()
 const leftClickHandle = () => {
   router.back()
