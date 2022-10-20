@@ -1,19 +1,32 @@
 <template>
   <div class="inputPad">
     <div class="notes">
-      <span class="date">
+      <span class="date" @click="popupVisible = true">
         <img :src="dateSvg" alt="">
-        <span class="dateText">2025-04-12</span>
+        <span class="dateText">{{currentDate}}</span>
       </span>
       <span class="amount">123456</span>
     </div>
     <div class="pad">
       <button v-for="button in buttons" @click="button.clickFn">{{button.text}}</button>
     </div>
+    <!--弹出层 - 日期选择器-->
+    <van-popup v-model:show="popupVisible" position="bottom">
+      <van-datetime-picker
+          :value="currentDate"
+          type="date"
+          title="请选择年月日"
+          :min-date="minDate"
+          :max-date="maxDate"
+          @confirm = "clickConfirmHandle"
+          @cancel = "clickCancelHandle"
+      />
+    </van-popup>
   </div>
 </template>
 <script lang="ts" setup>
 import dateSvg from '../assets/icons/date.svg'
+import { ref } from 'vue';
 const buttons = [
   { text: '1', clickFn: () => { } },
   { text: '2', clickFn: () => { } },
@@ -32,6 +45,23 @@ const buttons = [
   { text: '清空', clickFn: () => { } },
   { text: '提交', clickFn: () => { } },
 ]
+// 弹出层
+const popupVisible = ref(false)
+// 选择的日期
+const currentDate = ref(new Date(2021, 0, 17));
+const minDate = new Date(2020, 0, 1)
+const maxDate = new Date(2025, 10, 1)
+
+// 日期选择 - 点击确认
+const clickConfirmHandle = (date:Date) => {
+  console.log(date)
+  popupVisible.value = false
+  currentDate.value = date
+}
+// 日期选择 - 点击取消
+const clickCancelHandle = () => {
+  popupVisible.value = false
+}
 </script>
 <style lang="scss" scoped>
 .inputPad{
