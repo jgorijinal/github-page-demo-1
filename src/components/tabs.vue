@@ -44,7 +44,7 @@ const clickTab = (item:any) => {
 <style lang="scss" scoped>
 .eren-tabs{
   .active {
-    transition: all 0.25s ease;
+    transition: all 0.4s ease;
     position:relative;
     &::after {
       content:'';
@@ -60,7 +60,7 @@ const clickTab = (item:any) => {
   &-tab {
     background-color: #273c75;
     display:flex;
-    font-size: px;
+    font-size: 16px;
     &-name {
       color:white;
       padding:8px 16px;
@@ -68,6 +68,7 @@ const clickTab = (item:any) => {
       display:flex;
       justify-content: center;
       align-items: center;
+      cursor:pointer;
     }
   }
 }

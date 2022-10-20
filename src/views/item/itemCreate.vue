@@ -11,6 +11,10 @@
       <tab name="支出">内容 1</tab>
       <tab name="收入">内容 2</tab>
     </tabs>
+    <!--数字键盘-->
+    <div class="eren-inputPad">
+      <inputPad />
+    </div>
   </div>
 </template>
 <script lang="ts" setup>
@@ -18,6 +22,7 @@
 import navBar from '../../components/navBar.vue'
 import tabs from '../../components/tabs.vue'
 import tab from '../../components/tab.vue'
+import inputPad from '../../components/inputPad.vue'
 // svg
 import fanhuiSvg from '../../assets/icons/fanhui.svg'
 // vue
@@ -36,5 +41,11 @@ const activeName = ref('支出')
 img {
   width:1.2em;
   height:1.2em;
+}
+.eren-inputPad {
+  position:fixed;
+  left:0;
+  width:100%;
+  bottom:0;
 }
 </style>
