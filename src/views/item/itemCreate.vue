@@ -12,8 +12,8 @@
       <tab name="收入">内容 2</tab>
     </tabs>
     <!--数字键盘-->
-    <div class="eren-inputPad">
-      <inputPad />
+    <div class="eren-inputPad" >
+      <inputPad @click-submit="submitHandle"/>
     </div>
   </div>
 </template>
@@ -33,8 +33,11 @@ const router = useRouter()
 const leftClickHandle = () => {
   router.back()
 }
-
 const activeName = ref('支出')
+// 监听键盘提交事件
+const submitHandle = (amount:string) => {
+  console.log(amount)
+}
 </script>
 <style lang="scss" scoped>
 img {

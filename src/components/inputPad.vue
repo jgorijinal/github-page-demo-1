@@ -46,6 +46,7 @@ const clickCancelHandle = () => {
   popupVisible.value = false
 }
 
+const emits = defineEmits(['click-submit'])
 const buttons = [
   { text: '1', clickFn: () => { appendText('1')} },
   { text: '2', clickFn: () => { appendText('2')} },
@@ -59,7 +60,10 @@ const buttons = [
   { text: '0', clickFn: () => { appendText('0')} },
   { text: '·', clickFn: () => { appendText('.')} },
   { text: '清空', clickFn: () => {amount.value = '0' } },
-  { text: '提交', clickFn: () => { console.log('提交')} },
+  {
+    text: '提交', clickFn: () => { 
+      emits('click-submit' , amount.value)
+  } },
 ]
 // 按键逻辑
 const amount = ref('0')
