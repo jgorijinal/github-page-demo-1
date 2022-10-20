@@ -26,7 +26,7 @@
 </template>
 <script lang="ts" setup>
 import dateSvg from '../assets/icons/date.svg'
-import { ref } from 'vue';
+import { ref,watch } from 'vue';
 import formatDate from '../utils/formatDate'
 // 弹出层
 const popupVisible = ref(false)
@@ -47,28 +47,43 @@ const clickCancelHandle = () => {
 }
 
 const buttons = [
-  { text: '1', clickFn: () => { appendText('1') } },
-  { text: '2', clickFn: () => { appendText('2') } },
-  { text: '3', clickFn: () => { appendText('3') } },
-  { text: '4', clickFn: () => { } },
-  { text: '5', clickFn: () => { } },
-  { text: '6', clickFn: () => { } },
-  { text: '7', clickFn: () => { } },
-  { text: '8', clickFn: () => { } },
-  { text: '9', clickFn: () => { } },
-  { text: '0', clickFn: () => {appendText('0') } },
-  { text: '·', clickFn: () => { } },
-  { text: '清空', clickFn: () => { } },
-  { text: '提交', clickFn: () => { } },
-  
+  { text: '1', clickFn: () => { appendText('1')} },
+  { text: '2', clickFn: () => { appendText('2')} },
+  { text: '3', clickFn: () => { appendText('3')} },
+  { text: '4', clickFn: () => { appendText('4')} },
+  { text: '5', clickFn: () => { appendText('5')} },
+  { text: '6', clickFn: () => { appendText('6')} },
+  { text: '7', clickFn: () => { appendText('7')} },
+  { text: '8', clickFn: () => { appendText('8')} },
+  { text: '9', clickFn: () => { appendText('9')} },
+  { text: '0', clickFn: () => { appendText('0')} },
+  { text: '·', clickFn: () => { appendText('.')} },
+  { text: '清空', clickFn: () => {amount.value = '0' } },
+  { text: '提交', clickFn: () => { console.log('提交')} },
 ]
 // 按键逻辑
 const amount = ref('0')
 
-const appendText = (val:string) => {
-
+const appendText = (str:string) => {
+  if (str === '.') {
+    if (amount.value.indexOf('.') > -1) {
+      return 
+    }
+  }
+  if (amount.value === '0') {
+    if (str === '.') {
+      amount.value += str
+      return 
+    }
+    amount.value = ''  
+    amount.value += str
+    return 
+  }
+  if (amount.value.length === 16) {
+    return
+  }
+  amount.value += str
 }
-
 </script>
 <style lang="scss" scoped>
 .inputPad{
@@ -119,6 +134,11 @@ const appendText = (val:string) => {
       color:#636e72;
       background-color:white;
       transition:all 0.25s ease;
+      &:hover,&:active {
+        background-color: #feedb0;
+        border-right:1px solid #feedb0;
+        border-bottom:1px solid #feedb0;
+      }
       &:nth-child(1) {
         grid-area:n1;
       }
@@ -157,11 +177,13 @@ const appendText = (val:string) => {
       }
       &:nth-child(13) {
         grid-area:s;
+        background-color: #3465e0;
+        color:white;
+        &:hover,&:active {
+        background-color: #5a81e6;
+        border-right:1px solid #3465e0;
+        border-bottom:1px solid #3465e0;
       }
-      &:hover,&:active {
-        background-color: #feedb0;
-        border-right:1px solid #feedb0;
-        border-bottom:1px solid #feedb0;
       }
     }
   }
