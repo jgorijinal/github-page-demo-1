@@ -23,6 +23,7 @@ declare module '@vue/runtime-core' {
     Third: typeof import('./src/components/welcome/third.vue')['default']
     VanButton: typeof import('vant/es')['Button']
     VanDatetimePicker: typeof import('vant/es')['DatetimePicker']
+    VanNumberKeyboard: typeof import('vant/es')['NumberKeyboard']
     VanPopup: typeof import('vant/es')['Popup']
   }
 }

@@ -5,7 +5,7 @@
         <img :src="dateSvg" alt="">
         <span class="dateText">{{formatDate(currentDate)}}</span>
       </span>
-      <span class="amount">123456</span>
+      <span class="amount">{{amount}}</span>
     </div>
     <div class="pad">
       <button v-for="button in buttons" @click="button.clickFn">{{button.text}}</button>
@@ -28,24 +28,6 @@
 import dateSvg from '../assets/icons/date.svg'
 import { ref } from 'vue';
 import formatDate from '../utils/formatDate'
-const buttons = [
-  { text: '1', clickFn: () => { } },
-  { text: '2', clickFn: () => { } },
-  { text: '3', clickFn: () => { } },
-  { text: 'del', clickFn: () => { } },
-  { text: '4', clickFn: () => { } },
-  { text: '5', clickFn: () => { } },
-  { text: '6', clickFn: () => { } },
-  { text: '+', clickFn: () => { } },
-  { text: '7', clickFn: () => { } },
-  { text: '8', clickFn: () => { } },
-  { text: '9', clickFn: () => { } },
-  { text: '-', clickFn: () => { } },
-  { text: '.', clickFn: () => { } },
-  { text: '0', clickFn: () => { } },
-  { text: '清空', clickFn: () => { } },
-  { text: '提交', clickFn: () => { } },
-]
 // 弹出层
 const popupVisible = ref(false)
 // 选择的日期
@@ -63,6 +45,30 @@ const clickConfirmHandle = (date:Date) => {
 const clickCancelHandle = () => {
   popupVisible.value = false
 }
+
+const buttons = [
+  { text: '1', clickFn: () => { appendText('1') } },
+  { text: '2', clickFn: () => { appendText('2') } },
+  { text: '3', clickFn: () => { appendText('3') } },
+  { text: '4', clickFn: () => { } },
+  { text: '5', clickFn: () => { } },
+  { text: '6', clickFn: () => { } },
+  { text: '7', clickFn: () => { } },
+  { text: '8', clickFn: () => { } },
+  { text: '9', clickFn: () => { } },
+  { text: '0', clickFn: () => {appendText('0') } },
+  { text: '·', clickFn: () => { } },
+  { text: '清空', clickFn: () => { } },
+  { text: '提交', clickFn: () => { } },
+  
+]
+// 按键逻辑
+const amount = ref('0')
+
+const appendText = (val:string) => {
+
+}
+
 </script>
 <style lang="scss" scoped>
 .inputPad{
@@ -93,26 +99,69 @@ const clickCancelHandle = () => {
     }
   }
   .pad{
-    font-size: 16px;
-    display: flex;
-    flex-wrap: wrap;
+    font-size: 18px;
     border-top:1px solid rgb(225, 224, 224);
+    display:grid;
+    grid-template-areas: 
+    "n1 n2 n3 d"
+    "n4 n5 n6 d"
+    "n7 n8 n9 s"
+    "n0 n0 nd s";
+    grid-auto-columns: 1fr;
+    gap:6px;
     button {
       border:none;
       border-right:1px solid rgb(225, 224, 224);
       border-bottom:1px solid rgb(225, 224, 224);
       padding:16px;
-      width:25%;
+      width:100%;
+      border-radius:4px;
       color:#636e72;
       background-color:white;
       transition:all 0.25s ease;
-      &:nth-child(4n) {
-        border-right:none;
+      &:nth-child(1) {
+        grid-area:n1;
+      }
+      &:nth-child(2) {
+        grid-area:n2;
+      }
+      &:nth-child(3) {
+        grid-area:n3;
+      }
+      &:nth-child(4) {
+        grid-area:n4;
+      }
+      &:nth-child(5) {
+        grid-area:n5;
+      }
+      &:nth-child(6) {
+        grid-area:n6;
+      }
+      &:nth-child(7) {
+        grid-area:n7;
+      }
+      &:nth-child(8) {
+        grid-area:n8;
+      }
+      &:nth-child(9) {
+        grid-area:n9;
+      }
+      &:nth-child(10) {
+        grid-area:n0;
+      }
+      &:nth-child(11) {
+        grid-area:nd;
+      }
+      &:nth-child(12) {
+        grid-area:d;
+      }
+      &:nth-child(13) {
+        grid-area:s;
       }
       &:hover,&:active {
         background-color: #feedb0;
         border-right:1px solid #feedb0;
-      border-bottom:1px solid #feedb0;
+        border-bottom:1px solid #feedb0;
       }
     }
   }
