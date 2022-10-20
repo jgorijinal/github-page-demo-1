@@ -3,7 +3,7 @@
     <div class="notes">
       <span class="date" @click="popupVisible = true">
         <img :src="dateSvg" alt="">
-        <span class="dateText">{{currentDate}}</span>
+        <span class="dateText">{{formatDate(currentDate)}}</span>
       </span>
       <span class="amount">123456</span>
     </div>
@@ -27,6 +27,7 @@
 <script lang="ts" setup>
 import dateSvg from '../assets/icons/date.svg'
 import { ref } from 'vue';
+import formatDate from '../utils/formatDate'
 const buttons = [
   { text: '1', clickFn: () => { } },
   { text: '2', clickFn: () => { } },
