@@ -43,6 +43,7 @@ import EmojiSelect from '../../components/emojiSelect.vue'
 import fanhuiSvg from '../../assets/icons/fanhui.svg'
 import { validate, Rules} from '../../utils/validate'
 import { reactive, ref } from 'vue'
+// 表单数据
 const formData = reactive({
   tagName: '',
   emoji:''
@@ -57,14 +58,11 @@ type FormData =  {
   emoji:string
 }
 
-// errore的 结构
-// const errors = {
-//   'tagName': ['错误1', '错误2'],
-//   'emoji':['错误3', '错误4']
-// }
-
+// 表单验证报错结果
 const errors = ref<any>([])
-const onSubmit = () => {
+//表单提交
+const onSubmit = (e:Event) => {
+  e.preventDefault()
   errors.value = validate<FormData>(formData, rules)
   console.log(errors.value)
 }
