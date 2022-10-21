@@ -33,7 +33,7 @@ const table: [string, string[]][] = [
 ]
 // 当前的 tab
 const selectedTab = ref(0)
-// 选中的 tab 对应的符号
+// 筛选选中的 tab 对应的符号
 const emojis = computed(() => {
       const selectedItem = table[selectedTab.value][1]
       return selectedItem.map(category =>

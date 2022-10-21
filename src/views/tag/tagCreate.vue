@@ -1,7 +1,7 @@
 <template>
   <nav-bar title="新建标签">
     <template #leftIcon>
-      <img :src="fanhuiSvg" alt="">
+      <img :src="fanhuiSvg" alt="" @click="$router.back()">
     </template>
   </nav-bar>
   <form class="form">
@@ -20,7 +20,7 @@
       <label class="formLabel">
         <span class="formItem_name">符号: {{formData.emoji}}</span>
         <div class="formItem_value">
-          <!--符号选择组件-->
+          <!--表情选择器 组件-->
           <emoji-select class="formItem emojiList error" v-model="formData.emoji"/>
         </div>
         <div class="formItem_errorHint">
