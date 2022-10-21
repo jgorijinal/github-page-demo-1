@@ -28,5 +28,19 @@ export const routes: RouteRecordRaw[] = [
         component:()=>import('../views/item/itemCreate.vue')
       }
     ]
+  },
+  {
+    path: '/tag',
+    redirect:'/tag/create',
+    children: [
+      {
+        path: 'create',
+        component:()=>import('../views/tag/tagCreate.vue')
+      },
+      {
+        path: 'edit',
+        component:()=>import('../views/tag/tagEdit.vue')
+      }
+    ]
   }
 ]
