@@ -4,15 +4,15 @@
       <img :src="fanhuiSvg" alt="" @click="$router.back()">
     </template>
   </nav-bar>
-  <form class="form">
+  <form class="form" @submit="onSubmit">
     <div class="formRow">
       <label class="formLabel">
         <span class="formItem_name">标签名</span>
         <div class="formItem_value">
-          <input class="formItem input error" v-model="formData.tagName" placeholder="可输入1-4个字符"/>
+          <input class="formItem input" :class="{error: errors['tagName']}" v-model="formData.tagName" placeholder="可输入1-4个字符"/>
         </div>
         <div class="formItem_errorHint">
-          <span>必填</span>
+          <span>{{errors['tagName'] ? errors['tagName'][0] : '' }}</span>
         </div>
       </label>
     </div>
@@ -21,17 +21,17 @@
         <span class="formItem_name">符号: {{formData.emoji}}</span>
         <div class="formItem_value">
           <!--表情选择器 组件-->
-          <emoji-select class="formItem emojiList error" v-model="formData.emoji"/>
+          <emoji-select class="formItem emojiList"  :class="{error: errors['emoji']}" v-model="formData.emoji"/>
         </div>
         <div class="formItem_errorHint">
-          <span>必填</span>
+          <span>{{ errors['emoji'] ? errors['emoji'][0] : '' }}</span>
         </div>
       </label>
     </div>
     <p class="tips">记账时长按标签即可进行编辑</p>
     <div class="formRow">
       <div class="formItem_value">
-        <e-button class="button">确定</e-button>
+        <e-button class="button" @click="onSubmit">确定</e-button>
       </div>
     </div>
   </form>
@@ -41,11 +41,33 @@ import NavBar from '../../components/navBar.vue'
 import EButton from '../../components/button.vue'
 import EmojiSelect from '../../components/emojiSelect.vue'
 import fanhuiSvg from '../../assets/icons/fanhui.svg'
-import { reactive } from 'vue'
+import { validate, Rules} from '../../utils/validate'
+import { reactive, ref } from 'vue'
 const formData = reactive({
   tagName: '',
-  emoji:'(请选择符号)'
+  emoji:''
 })
+const rules:Rules<FormData> = [
+  { key: 'tagName', required: true, message: '必填' },
+  { key: 'tagName', pattern: /^.{1,4}$/, message: '请填入1~4个字符' },
+  { key: 'emoji', required: true, message: '必填' },
+]
+type FormData =  {
+  tagName:string
+  emoji:string
+}
+
+// errore的 结构
+// const errors = {
+//   'tagName': ['错误1', '错误2'],
+//   'emoji':['错误3', '错误4']
+// }
+
+const errors = ref<any>([])
+const onSubmit = () => {
+  errors.value = validate<FormData>(formData, rules)
+  console.log(errors.value)
+}
 </script>
 <style lang="scss" scoped>
 img {
