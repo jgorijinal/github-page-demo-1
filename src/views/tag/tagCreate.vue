@@ -9,7 +9,7 @@
       <label class="formLabel">
         <span class="formItem_name">标签名</span>
         <div class="formItem_value">
-          <input class="formItem input error" />
+          <input class="formItem input error" v-model="formData.tagName" placeholder="可输入1-4个字符"/>
         </div>
         <div class="formItem_errorHint">
           <span>必填</span>
@@ -18,160 +18,10 @@
     </div>
     <div class="formRow">
       <label class="formLabel">
-        <span class="formItem_name">符号</span>
+        <span class="formItem_name">符号: {{formData.emoji}}</span>
         <div class="formItem_value">
-          <div class="formItem emojiList error">
-            <nav>
-              <span class="selected">表情</span>
-              <span>手势</span>
-              <span>职业</span>
-              <span>衣服</span>
-              <span>动物</span>
-              <span>自然</span>
-              <span>食物</span>
-              <span>运动</span>
-              <span>表情</span>
-              <span>手势</span>
-              <span>职业</span>
-              <span>衣服</span>
-              <span>动物</span>
-              <span>自然</span>
-              <span>食物</span>
-              <span>运动</span>
-            </nav>
-            <ol>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-              <li>😀</li>
-            </ol>
-          </div>
+          <!--符号选择组件-->
+          <emoji-select class="formItem emojiList error" v-model="formData.emoji"/>
         </div>
         <div class="formItem_errorHint">
           <span>必填</span>
@@ -189,7 +39,13 @@
 <script setup lang="ts">
 import NavBar from '../../components/navBar.vue'
 import EButton from '../../components/button.vue'
+import EmojiSelect from '../../components/emojiSelect.vue'
 import fanhuiSvg from '../../assets/icons/fanhui.svg'
+import { reactive } from 'vue'
+const formData = reactive({
+  tagName: '',
+  emoji:'(请选择符号)'
+})
 </script>
 <style lang="scss" scoped>
 img {
@@ -222,52 +78,6 @@ img {
     box-shadow: inset 0 0 3px  rgba(0,0,0,0.25);
     &.error {
       border-color: #E10505;
-    }
-  }
-  &.emojiList {
-    flex-grow: 1;
-    border: 1px solid #5c33be;
-    border-radius: 4px;
-    font-size: 18px;
-    font-size: 14px;
-    &.error {
-      border-color: #E10505;
-    }
-    > nav {
-      display: flex;
-      flex-wrap: nowrap;
-      overflow: auto;
-      padding: 0 4px;
-      &::-webkit-scrollbar {
-        display: none;
-      }
-      > span {
-        flex-shrink: 0;
-        display: inline-block;
-        padding: 8px;
-        color: #999;
-        &.selected {
-          color:  #333;
-        }
-      }
-    }
-    > ol {
-      display: flex;
-      flex-wrap: wrap;
-      font-size: 22px;
-      line-height: 32px;
-      height: calc(32px * 12);
-      overflow: auto;
-      padding: 0 4px;
-      &::-webkit-scrollbar {
-        display: none;
-      }
-      > li {
-        flex-shrink: 0;
-        flex-grow: 0;
-        width: 10%;
-        text-align: center;
-      }
     }
   }
   &_name {
