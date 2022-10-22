@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Button: typeof import('./src/components/button.vue')['default']
     Card: typeof import('./src/components/welcome/components/card.vue')['default']
+    DatePicker: typeof import('./src/components/datePicker.vue')['default']
     EmojiSelect: typeof import('./src/components/emojiSelect.vue')['default']
     First: typeof import('./src/components/welcome/first.vue')['default']
     FloatButton: typeof import('./src/components/floatButton.vue')['default']
@@ -25,6 +26,7 @@ declare module '@vue/runtime-core' {
     Third: typeof import('./src/components/welcome/third.vue')['default']
     VanButton: typeof import('vant/es')['Button']
     VanDatetimePicker: typeof import('vant/es')['DatetimePicker']
+    VanField: typeof import('vant/es')['Field']
     VanNumberKeyboard: typeof import('vant/es')['NumberKeyboard']
     VanPopup: typeof import('vant/es')['Popup']
   }

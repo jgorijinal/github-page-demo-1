@@ -25,7 +25,6 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-import dayjs from 'dayjs'
 interface ItemSummaryProps {
   startDate: string
   endDate:string
