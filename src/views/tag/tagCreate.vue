@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="action-buttons" v-if="isEdit">
-      <e-button class="action">删除标签</e-button>
+      <e-button class="action" >删除标签</e-button>
       <e-button class="action">删除标签和对应的记账</e-button>
     </div>
   </form>

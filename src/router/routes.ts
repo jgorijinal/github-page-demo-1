@@ -27,6 +27,10 @@ export const routes: RouteRecordRaw[] = [
         path: 'create',
         component:()=>import('../views/item/itemCreate.vue')
       }
+      {
+        path: 'list',
+        component:()=>import('../views/item/itemList.vue')
+      }
     ]
   },
   {
