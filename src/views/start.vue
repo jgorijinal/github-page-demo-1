@@ -17,41 +17,18 @@
     <!--悬浮按钮-->
     <float-button />
     <!--遮罩层-->
-    <Overlay :visible="overlayVisible" @close-overlay="closeOverlayHandle">
-      <ul class="menu-nav">
-        <li class="menu-nav-item">
-          <img :src="tongjiSvg" alt="">
-          <span>统计图表</span>
-        </li>
-        <li class="menu-nav-item">
-          <img :src="fenleiSvg" alt="">
-          <span>自定义分类</span>
-        </li>
-        <li class="menu-nav-item">
-          <img :src="exportSvg" alt="">
-          <span>导出数据</span>
-        </li>
-        <li class="menu-nav-item">
-          <img :src="tixingSvg" alt="">
-          <span>记账提醒</span>
-        </li>
-      </ul>
-    </Overlay>
+    <overlay-with-route :overlayVisible="overlayVisible" @close-overlay="closeOverlayHandle"/>
   </div>
 </template>
 <script setup lang="ts">
 // svg
 import menuSvg from '../assets/icons/menu.svg'
 import pigSvg from '../assets/icons/pig.svg'
-import tongjiSvg from '../assets/icons/tongji.svg'
-import fenleiSvg from '../assets/icons/fenlei.svg'
-import exportSvg from '../assets/icons/export.svg'
-import tixingSvg from '../assets/icons/tixing.svg'
 // 组件
 import EButton from '../components/button.vue'
 import navBar from '../components/navBar.vue'
 import FloatButton from '../components/floatButton.vue'
-import Overlay from '../components/overlay.vue'
+import OverlayWithRoute from '../components/OverlayWithRoute.vue'
 
 import { ref } from 'vue'
 import { useRouter} from 'vue-router'
@@ -94,26 +71,6 @@ const closeOverlayHandle = () => {
   padding: 80px;
   > span {
     margin-top:16px;
-  }
-}
-.menu-nav {
-    display: flex;
-    flex-direction: column;
-  &-item {
-    display: flex;
-    align-items: center;
-    font-size: 18px;
-    padding:8px 10px;
-    transition: all 0.25s ease;
-    cursor:pointer;
-    &:hover,&:active {
-      background-color: antiquewhite;
-    }
-    img{
-      width:1.8em;
-      height:1.8em;
-      margin-right: 8px;
-    }
   }
 }
 </style>
