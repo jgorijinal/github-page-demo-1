@@ -25,6 +25,7 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
+import dayjs from 'dayjs'
 interface ItemSummaryProps {
   startDate: string
   endDate:string
@@ -65,7 +66,7 @@ const data = ref([
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #cac6c6;
+        background-color: #eae5e5;
         border-radius: 50%;
         width:3em;
         height:3em;

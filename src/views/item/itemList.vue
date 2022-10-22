@@ -8,10 +8,14 @@
   <!--标签页-->
   <tabs v-model:active="activeName">
     <tab name="本月">
-      <item-summary  startDate="2022-01-01" endDate="2022-01-31"/>
+      <item-summary  :startDate="getThisMonth().startDate" :endDate="getThisMonth().endDate"/>
     </tab>
-    <tab name="上月"></tab>
-    <tab name="今年"></tab>
+    <tab name="上月">
+      <item-summary  :startDate="getLastMonth().startDate" :endDate="getLastMonth().endDate"/>
+    </tab>
+    <tab name="今年">
+      <item-summary  :startDate="getThisYear().startDate" :endDate="getThisYear().endDate"/>
+    </tab>
     <tab name="自定义时间"></tab>
   </tabs> 
 </template>
@@ -24,6 +28,7 @@ import menuSvg from '../../assets/icons/menu.svg'
 import overlayWithRoute from '../../components/overlayWithRoute.vue'
 import itemSummary from './components/itemSummary.vue'
 import { ref } from 'vue'
+import { getThisMonth,getLastMonth,getThisYear } from '../../utils/dateCalc'
 const overlayVisible = ref(false)
 
 
