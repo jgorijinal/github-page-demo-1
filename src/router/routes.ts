@@ -38,8 +38,8 @@ export const routes: RouteRecordRaw[] = [
         component:()=>import('../views/tag/tagCreate.vue')
       },
       {
-        path: 'edit',
-        component:()=>import('../views/tag/tagEdit.vue')
+        path: ':id/edit',
+        component:()=>import('../views/tag/tagCreate.vue')
       }
     ]
   }
