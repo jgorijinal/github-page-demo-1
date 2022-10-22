@@ -31,8 +31,12 @@
     <p class="tips">记账时长按标签即可进行编辑</p>
     <div class="formRow">
       <div class="formItem_value">
-        <e-button class="button" @click="onSubmit">确定</e-button>
+        <e-button class="button" @click="onSubmit">{{isEdit ? '保存' : '确定'}}</e-button>
       </div>
+    </div>
+    <div class="action-buttons" v-if="isEdit">
+      <e-button class="action">删除标签</e-button>
+      <e-button class="action">删除标签和对应的记账</e-button>
     </div>
   </form>
 </template>
@@ -42,7 +46,8 @@ import EButton from '../../components/button.vue'
 import EmojiSelect from '../../components/emojiSelect.vue'
 import fanhuiSvg from '../../assets/icons/fanhui.svg'
 import { validate, Rules} from '../../utils/validate'
-import { reactive, ref } from 'vue'
+import { reactive, ref,computed } from 'vue'
+import { useRoute } from 'vue-router'
 // 表单数据
 const formData = reactive({
   tagName: '',
@@ -66,6 +71,12 @@ const onSubmit = (e:Event) => {
   errors.value = validate<FormData>(formData, rules)
   console.log(errors.value)
 }
+
+const route = useRoute()
+// 是否编辑状态
+const isEdit = computed(() => {
+  return Boolean(route.params.id)
+})
 </script>
 <style lang="scss" scoped>
 img {
@@ -114,4 +125,20 @@ img {
     color: red;
     font-size: 12px;
   }
-}</style>
+}
+::v-deep.action-buttons {
+  justify-content: space-between;
+  margin-top:8px;
+  display: flex;
+  .action {
+    flex-grow: 1;
+    &:first-child{
+      margin-right:10px;
+    }
+     .eren-button {
+      background-color: #e10405;
+      border:1px solid #e10405;
+    }
+  }
+}
+</style>
