@@ -7,7 +7,9 @@
   <overlay-with-route :overlayVisible="overlayVisible" @close-overlay="overlayVisible = false"/>
   <!--标签页-->
   <tabs v-model:active="activeName">
-    <tab name="本月"></tab>
+    <tab name="本月">
+      <item-summary  startDate="2022-01-01" endDate="2022-01-31"/>
+    </tab>
     <tab name="上月"></tab>
     <tab name="今年"></tab>
     <tab name="自定义时间"></tab>
@@ -20,6 +22,7 @@ import tab from '../../components/tab.vue'
 import menuSvg from '../../assets/icons/menu.svg'
 
 import overlayWithRoute from '../../components/overlayWithRoute.vue'
+import itemSummary from './components/itemSummary.vue'
 import { ref } from 'vue'
 const overlayVisible = ref(false)
 
