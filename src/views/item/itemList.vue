@@ -6,7 +6,8 @@
   </nav-bar>
   <overlay-with-route :overlayVisible="overlayVisible" @close-overlay="overlayVisible = false"/>
   <!--标签页-->
-  <tabs v-model:active="activeName">
+  <keep-alive>
+    <tabs v-model:active="activeName">
     <tab name="本月">
       <item-summary  :startDate="getThisMonth().startDate" :endDate="getThisMonth().endDate"/>
     </tab>
@@ -17,11 +18,12 @@
       <item-summary  :startDate="getThisYear().startDate" :endDate="getThisYear().endDate"/>
     </tab>
     <tab name="自定义时间">
-      <!--日期选择器(二次封装)-->
-      <date-picker @date-changed="dateChanged"/>
-      <item-summary  :startDate="customDate.startDate" :endDate="customDate.endDate"/>
+          <!--日期选择器(二次封装)-->
+        <date-picker @date-changed="dateChanged"/>
+        <item-summary  :startDate="customDate.startDate" :endDate="customDate.endDate"/>
     </tab>
   </tabs> 
+  </keep-alive>
 </template>
 <script setup lang="ts">
 import navBar from '../../components/navBar.vue'
@@ -32,7 +34,7 @@ import menuSvg from '../../assets/icons/menu.svg'
 import overlayWithRoute from '../../components/overlayWithRoute.vue'
 import itemSummary from './components/itemSummary.vue'
 import datePicker from '../../components/datePicker.vue'
-import { ref,watch } from 'vue'
+import { ref } from 'vue'
 import { getThisMonth,getLastMonth,getThisYear } from '../../utils/dateCalc'
 // 左侧菜单显示/隐藏
 const overlayVisible = ref(false)

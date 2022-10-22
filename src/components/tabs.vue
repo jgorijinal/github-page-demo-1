@@ -9,7 +9,9 @@
       >{{item.props?.name}}</li>
     </ul>
     <!--细节: 这个时候 component 动态组件必须要加上 key-->
-    <component :is="activeTab" :key="activeTab.props?.name"></component>
+    <keep-alive>
+      <component :is="activeTab" :key="activeTab.props?.name"></component>
+    </keep-alive>
   </div>
 </template>
 <script lang="ts" setup>

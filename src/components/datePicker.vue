@@ -16,8 +16,7 @@
       :disabled="dateEndDisabled"
       @click="clickDateEndPicker"
     />
-  </div>
-  <van-popup v-model:show="dateStartPickerVisible" position="bottom">
+    <van-popup v-model:show="dateStartPickerVisible" position="bottom">
       <van-datetime-picker
           :value="startDate"
           type="date"
@@ -36,6 +35,7 @@
           @cancel = "onCancel"
       />
     </van-popup>
+  </div>
 </template>
 <script setup lang="ts">
 import { ref, watch } from "vue";
