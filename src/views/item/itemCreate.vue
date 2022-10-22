@@ -6,7 +6,7 @@
         <img :src="fanhuiSvg" alt="">
       </template>
     </nav-bar>
-    <!--标签栏-->
+  <!--标签栏-->
     <tabs v-model:active="activeName">
       <tab name="支出">
         <div class="eren-tag-wrapper">

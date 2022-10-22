@@ -16,6 +16,7 @@ declare module '@vue/runtime-core' {
     InputPad: typeof import('./src/components/inputPad.vue')['default']
     NavBar: typeof import('./src/components/navBar.vue')['default']
     Overlay: typeof import('./src/components/overlay.vue')['default']
+    OverlayWithRoute: typeof import('./src/components/overlayWithRoute.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Second: typeof import('./src/components/welcome/second.vue')['default']

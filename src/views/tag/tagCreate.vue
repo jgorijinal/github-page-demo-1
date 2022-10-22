@@ -1,5 +1,5 @@
 <template>
-  <nav-bar title="新建标签">
+  <nav-bar :title="isEdit ? '编辑标签' : '新建标签'">
     <template #leftIcon>
       <img :src="fanhuiSvg" alt="" @click="$router.back()">
     </template>
