@@ -9,8 +9,41 @@
     <!--标签栏-->
     <tabs v-model:active="activeName">
       <tab name="支出">
+        <div class="eren-tag-wrapper">
+        <div class="eren-tag-container add" @click="$router.push('/tag/create')">
+          <img :src="add2Svg" alt="" class="eren-tag-emoji add">
+          <span class="eren-tag-name">
+            新增标签
+          </span>
+        </div>
+        <div class="eren-tag-container" v-for="tag in expensesTags" :key="tag.id">
+          <span class="eren-tag-emoji">
+            {{tag.emoji}}
+          </span>
+          <span class="eren-tag-name">
+            {{tag.tagName}}
+          </span>
+        </div>
+      </div>
       </tab>
-      <tab name="收入">内容 2</tab>
+      <tab name="收入">
+        <div class="eren-tag-wrapper">
+        <div class="eren-tag-container add" @click="$router.push('/tag/create')">
+          <img :src="add2Svg" alt="" class="eren-tag-emoji add">
+          <span class="eren-tag-name">
+            新增标签
+          </span>
+        </div>
+        <div class="eren-tag-container" v-for="tag in inComeTags" :key="tag.id">
+          <span class="eren-tag-emoji">
+            {{tag.emoji}}
+          </span>
+          <span class="eren-tag-name">
+            {{tag.tagName}}
+          </span>
+        </div>
+      </div>
+      </tab>
     </tabs>
     <!--数字键盘-->
     <div class="eren-inputPad" >
@@ -26,6 +59,7 @@ import tab from '../../components/tab.vue'
 import inputPad from '../../components/inputPad.vue'
 // svg
 import fanhuiSvg from '../../assets/icons/fanhui.svg'
+import add2Svg from '../../assets/icons/add2.svg'
 // vue
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -62,5 +96,44 @@ img {
   left:0;
   width:100%;
   bottom:0;
+}
+.eren-tag{
+  &-wrapper{
+    display: flex;
+    padding:8px;
+  }
+  &-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:8px;
+    border-radius:6px;
+    width:20vw;
+    transition: all 0.3s ease;
+    &.add {
+      justify-content: flex-start;
+      background-color:transparent;
+    }
+    &:hover,&:active {
+      background-color: #feedb0;
+    }
+  }
+  &-emoji{
+    border-radius:50%;
+    width:14vw;
+    height:14vw;
+    background-color: rgb(235, 235, 235);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.add {
+      background-color: white;
+    }
+  }
+  &-name {
+    font-size:14px;
+    color:rgb(61, 59, 59)
+  }
 }
 </style>

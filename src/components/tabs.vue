@@ -53,8 +53,8 @@ const clickTab = (item:any) => {
       bottom:0;
       left: 0;
       right:0;
-      height: 4px;
-      background-color: white;
+      height: 5px;
+      background-color: #f4cd41;
     }
   }
   &-tab {
