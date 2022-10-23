@@ -25,8 +25,11 @@ declare module '@vue/runtime-core' {
     Tabs: typeof import('./src/components/tabs.vue')['default']
     Third: typeof import('./src/components/welcome/third.vue')['default']
     VanButton: typeof import('vant/es')['Button']
+    VanCellGroup: typeof import('vant/es')['CellGroup']
+    VanCountDown: typeof import('vant/es')['CountDown']
     VanDatetimePicker: typeof import('vant/es')['DatetimePicker']
     VanField: typeof import('vant/es')['Field']
+    VanForm: typeof import('vant/es')['Form']
     VanNumberKeyboard: typeof import('vant/es')['NumberKeyboard']
     VanPopup: typeof import('vant/es')['Popup']
   }
