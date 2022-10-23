@@ -12,12 +12,14 @@
     <!--图表-->
     <line-echart :x-labels="['x1','x2','x3']" :values="['123','231','564']"></line-echart>
     <pie-echart :pie-data="[{name:'name1',value:'123'},{name:'name2',value:'564'}]"/>
+    <!--进度条-->
+    <progress-bar /> 
   </div>
 </template>
 <script setup lang="ts">
-import { ref,onMounted } from 'vue'
 import lineEchart from './LineEchart.vue'
 import pieEchart from './pieEchart.vue'
+import progressBar from './progressBar.vue'
 // 开始时间, 结束时间, 支出/收入类型 v-model 绑定
 interface chartsProps {
   startDate: string

@@ -4,7 +4,7 @@
       <img :src="fanhuiSvg" alt="" class="fanhui">
     </template>
   </nav-bar>
-  <tabs v-model:active="activeName">
+    <tabs v-model:active="activeName">
     <tab name="本月">
       <charts  :startDate="getThisMonth().startDate" :endDate="getThisMonth().endDate" v-model="activeSelect"/>
     </tab>

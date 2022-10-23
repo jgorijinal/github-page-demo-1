@@ -32,5 +32,7 @@ declare module '@vue/runtime-core' {
     VanForm: typeof import('vant/es')['Form']
     VanNumberKeyboard: typeof import('vant/es')['NumberKeyboard']
     VanPopup: typeof import('vant/es')['Popup']
+    VanProcess: typeof import('vant/es')['Process']
+    VanProgress: typeof import('vant/es')['Progress']
   }
 }
