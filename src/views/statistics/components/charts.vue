@@ -10,12 +10,12 @@
     </select>
     </div>
     <!--图表-->
-    <div ref="divRef" :style="{width:'100vw', height:'300px'}"></div>
+    <line-echart :x-labels="['x1','x2','x3']" :values="['123','231','564']"></line-echart>
   </div>
 </template>
 <script setup lang="ts">
 import { ref,onMounted } from 'vue'
-import * as echarts from 'echarts'
+import lineEchart from './LineEchart.vue'
 // 开始时间, 结束时间, 支出/收入类型 v-model 绑定
 interface chartsProps {
   startDate: string
@@ -31,26 +31,6 @@ const selectChange = (e:any) => {
   emits('update:modelValue',e.target.value)
 }
 
-const divRef = ref<HTMLDivElement>()
-onMounted(() => {
-  const echartsInstance = echarts.init(divRef.value!)
-  const options = {
-  xAxis: {
-    type: 'category',
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-  },
-  yAxis: {
-    type: 'value'
-  },
-  series: [
-    {
-      data: [150, 230, 224, 218, 135, 147, 260],
-      type: 'line'
-    }
-  ]
-  };
-  echartsInstance.setOption(options)
-})
 </script>
 <style lang="scss" scoped>
 .eren-chart-container{
