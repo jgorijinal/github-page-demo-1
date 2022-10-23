@@ -46,25 +46,28 @@ const clickTab = (item:any) => {
 <style lang="scss" scoped>
 .eren-tabs{
   .active {
-    transition: all 0.4s ease;
+    // transition: all 0.4s ease;
     position:relative;
-    &::after {
-      content:'';
-      display: block;
-      position:absolute;
-      bottom:0;
-      left: 0;
-      right:0;
-      height: 5px;
-      background-color: #f4cd41;
-    }
+    border:4px solid #f7f1e3
+    // &::after {
+    //   content:'';
+    //   display: block;
+    //   position:absolute;
+    //   bottom:0;
+    //   left: 0;
+    //   right:0;
+    //   height: 5px;
+    //   background-color: #f4cd41;
+    // }
   }
   &-tab {
     background-color: #273c75;
     display:flex;
     font-size: 16px;
     &-name {
+      border:4px solid #273c75;
       color:white;
+      border-radius: 4px;
       padding:8px 16px;
       flex-grow:1;
       display:flex;

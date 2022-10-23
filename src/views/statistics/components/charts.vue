@@ -24,7 +24,7 @@ import progressBar from './progressBar.vue'
 interface chartsProps {
   startDate: string
   endDate: string
-  modelValue:string
+  modelValue:string // 收入/支出
 }
 const props = defineProps<chartsProps>()
 const emits = defineEmits(['update:modelValue'])

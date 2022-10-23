@@ -1,5 +1,5 @@
 <template>
-  <nav-bar title="统计图标">
+  <nav-bar title="统计图标" @clickLeft="$router.back()">
     <template #leftIcon>
       <img :src="fanhuiSvg" alt="" class="fanhui">
     </template>

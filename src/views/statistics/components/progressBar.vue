@@ -22,6 +22,11 @@ const data = [
   { tag: { id: 2, name: '吃饭', sign: 'x' }, amount: 120 },
   { tag: {id:3,name:'娱乐',sign:'x'},amount: 140 },
 ]
+// const props = defineProps({
+//   data: {
+//     type:Object
+//   }
+// })
 // 每个数据加工加入百分比
 const betterData = computed(() => {
   let total = 0
@@ -34,7 +39,6 @@ const betterData = computed(() => {
     }
   })
 })
-console.log(betterData.value)
 </script>
 <style lang="scss" scoped>
 .progress-bar {
