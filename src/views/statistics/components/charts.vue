@@ -11,11 +11,13 @@
     </div>
     <!--图表-->
     <line-echart :x-labels="['x1','x2','x3']" :values="['123','231','564']"></line-echart>
+    <pie-echart :pie-data="[{name:'name1',value:'123'},{name:'name2',value:'564'}]"/>
   </div>
 </template>
 <script setup lang="ts">
 import { ref,onMounted } from 'vue'
 import lineEchart from './LineEchart.vue'
+import pieEchart from './pieEchart.vue'
 // 开始时间, 结束时间, 支出/收入类型 v-model 绑定
 interface chartsProps {
   startDate: string
@@ -34,8 +36,9 @@ const selectChange = (e:any) => {
 </script>
 <style lang="scss" scoped>
 .eren-chart-container{
-  padding:8px;
+    // padding:8px;
   .eren-chart-select{
+    padding: 20px 0 0 8px;
     display: flex;
     align-items: center;
     select{

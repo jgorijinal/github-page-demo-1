@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <base-echart :options="options"></base-echart>
+  <div class="line-echart">
+    <base-echart :options="options" height="280px"></base-echart>
   </div>
 </template>
 <script setup lang="ts">
@@ -13,7 +13,7 @@ export interface LineEchartProps {
   values:string[]
 }
 const props = defineProps<LineEchartProps>()
-// props数据有可能随时会变, 所以使用 computed 计算属性
+// props数据有可能随时会变, 所以使用 computed 计算属性返回 options
 const options = computed(() => {
   return {
   tooltip: {
@@ -25,12 +25,12 @@ const options = computed(() => {
       }
     }
   },
-  // grid: {
-  //   left: '3%',
-  //   right: '4%',
-  //   bottom: '3%',
-  //   containLabel: true
-  // },
+  grid: {
+    left: '2%',
+    bottom: '0',
+    right: '2%',
+    containLabel: true
+  },
   xAxis: [
     {
       type: 'category',
