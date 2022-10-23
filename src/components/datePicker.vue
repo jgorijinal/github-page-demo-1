@@ -3,6 +3,7 @@
     <van-field
       v-model="startDate"
       label="开始时间"
+      readonly
       label-width="56px"
       placeholder="选择开始时间"
       @focus="dateStartPickerVisible = true"
@@ -11,6 +12,7 @@
       v-model="endDate"
       label="结束时间"
       label-width="56px"
+      readonly
       placeholder="选择结束时间"
       @focus="dateEndPickerVisible = true"
       :disabled="dateEndDisabled"
@@ -54,13 +56,11 @@ const dateEndDisabled = ref(true)
 
 // 开始 确认
 const dateStartConfirm = (date:Date) => {
-  console.log(date)
   startDate.value = formateDate(date)
   dateStartPickerVisible.value = false
 }
 // 结束 确认
 const dateEndConfirm = (date:Date) => {
-  console.log(date)
   endDate.value = formateDate(date)
   dateEndPickerVisible.value = false
 

@@ -46,5 +46,10 @@ export const routes: RouteRecordRaw[] = [
         component:()=>import('../views/tag/tagCreate.vue')
       }
     ]
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/login.vue')
   }
 ]
