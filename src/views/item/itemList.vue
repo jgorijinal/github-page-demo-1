@@ -6,7 +6,6 @@
   </nav-bar>
   <overlay-with-route :overlayVisible="overlayVisible" @close-overlay="overlayVisible = false"/>
   <!--标签页-->
-  <keep-alive>
     <tabs v-model:active="activeName">
     <tab name="本月">
       <item-summary  :startDate="getThisMonth().startDate" :endDate="getThisMonth().endDate"/>
@@ -22,8 +21,7 @@
         <date-picker @date-changed="dateChanged"/>
         <item-summary  :startDate="customDate.startDate" :endDate="customDate.endDate"/>
     </tab>
-  </tabs> 
-  </keep-alive>
+  </tabs>
 </template>
 <script setup lang="ts">
 import navBar from '../../components/navBar.vue'
