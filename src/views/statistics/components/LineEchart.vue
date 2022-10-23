@@ -26,9 +26,9 @@ const options = computed(() => {
     }
   },
   grid: {
-    left: '2%',
+    left: '4%',
     bottom: '0',
-    right: '2%',
+    right: '4%',
     containLabel: true
   },
   xAxis: [

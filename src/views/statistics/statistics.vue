@@ -4,6 +4,7 @@
       <img :src="fanhuiSvg" alt="" class="fanhui">
     </template>
   </nav-bar>
+  <div class="container-wrapper">
     <tabs v-model:active="activeName">
     <tab name="本月">
       <charts  :startDate="getThisMonth().startDate" :endDate="getThisMonth().endDate" v-model="activeSelect"/>
@@ -20,6 +21,7 @@
         <charts  :startDate="customDate.startDate" :endDate="customDate.endDate" v-model="activeSelect"/>
     </tab>
   </tabs>
+  </div>
 </template>
 <script lang="ts" setup>
 import fanhuiSvg from '../../assets/icons/fanhui.svg'
@@ -42,7 +44,7 @@ const customDate = ref({
 
 // 日期改变
 const dateChanged = (date:any) => {
-  customDate.value = x
+  customDate.value = date
 }
 
 // 类型选择 收入income / 支出 expense
@@ -52,5 +54,14 @@ const activeSelect = ref('expense')
 img{
   width:1.2em;
   height:1.2em;
+}
+.eren-navBar-content{
+  position:fixed;
+  left:0;
+  top:0;
+  z-index:20;
+}
+.container-wrapper {
+  padding-top:50px;
 }
 </style>

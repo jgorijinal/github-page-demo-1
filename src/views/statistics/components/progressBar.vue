@@ -9,7 +9,7 @@
         <span>{{item.tag.name}}</span>
         <span>{{item.amount}}</span>
       </div>
-      <van-progress :percentage="50" color="#53a868" track-color="#cccccc"/>
+      <van-progress :percentage="item.percentage.slice(0,-1)" color="#53a868" track-color="#cccccc"/>
     </div>
   </div>
 </template>
