@@ -6,18 +6,18 @@
   </nav-bar>
   <tabs v-model:active="activeName">
     <tab name="本月">
-      <charts  :startDate="getThisMonth().startDate" :endDate="getThisMonth().endDate"/>
+      <charts  :startDate="getThisMonth().startDate" :endDate="getThisMonth().endDate" v-model="activeSelect"/>
     </tab>
     <tab name="上月">
-      <charts  :startDate="getLastMonth().startDate" :endDate="getLastMonth().endDate"/>
+      <charts  :startDate="getLastMonth().startDate" :endDate="getLastMonth().endDate" v-model="activeSelect"/>
     </tab>
     <tab name="今年">
-      <charts  :startDate="getThisYear().startDate" :endDate="getThisYear().endDate"/>
+      <charts  :startDate="getThisYear().startDate" :endDate="getThisYear().endDate" v-model="activeSelect"/>
     </tab>
     <tab name="自定义时间">
           <!--日期选择器(二次封装)-->
         <date-picker @date-changed="dateChanged"/>
-        <charts  :startDate="customDate.startDate" :endDate="customDate.endDate"/>
+        <charts  :startDate="customDate.startDate" :endDate="customDate.endDate" v-model="activeSelect"/>
     </tab>
   </tabs>
 </template>
@@ -44,6 +44,9 @@ const customDate = ref({
 const dateChanged = (date:any) => {
   customDate.value = x
 }
+
+// 类型选择 收入income / 支出 expense
+const activeSelect = ref('expense')
 </script>
 <style lang="scss" scoped>
 img{
