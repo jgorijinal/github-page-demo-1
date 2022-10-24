@@ -1,6 +1,6 @@
 import axios, {AxiosInstance,AxiosRequestConfig,AxiosError } from 'axios'
 type JSONValue = string | number | null | boolean | JSONValue[] | { [key: string]: JSONValue };
-
+import storage from '../utils/storage';
 export default class Http {
   instance:AxiosInstance
   constructor(baseURL: string) {
@@ -23,6 +23,17 @@ export default class Http {
 }
 
 export const http = new Http('/api/v1')
+
+http.instance.interceptors.request.use((config) => {
+  // 请求头统一注入 token
+  const token = storage.getItem('jwt')
+  if (token) {
+    config.headers!['Authorization'] = `Bearer ${token}`
+  }
+  return config
+}, (error) => {
+  return Promise.reject(error)
+})
 
 http.instance.interceptors.response.use((res) => {
   return res.data

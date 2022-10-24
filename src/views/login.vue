@@ -99,13 +99,14 @@ const onSubmit = async (val: any) => {
   });
   loginLoading.value = true
   try {
-    // TODO : 有点别扭, 没有用状态管理
+    // TODO : 有点别扭, 没有用状态管理 !!! 
     const res = await login(formData)
     // console.log(res)
-    storage.setItem('kwt', res.jwt)
+    storage.setItem('jwt', res.jwt)
     
     Toast.success("登录成功");
     loginLoading.value = false
+
     // 跳转到原来的页面(使用了 query)
     const redirectRoute = route.query.redirectRoute
     // console.log(redirectRoute)
