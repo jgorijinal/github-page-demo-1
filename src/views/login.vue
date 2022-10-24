@@ -36,7 +36,7 @@
       <van-button v-if="!countDownVisible" size="small" type="primary" color="#3465e0" @click="onSendCode">发送验证码</van-button>
     </template>
   </van-field>
-  <van-button block type="primary" color="#3465e0" round style="margin:30px 0"  native-type="submit">登录</van-button>
+  <van-button block type="primary" color="#3465e0" round style="margin:30px 0"  native-type="submit" :loading="loginLoading">登录</van-button>
 </van-cell-group>
 </van-form>
   </div>
@@ -46,17 +46,15 @@ import fanhuiSvg from '../assets/icons/fanhui.svg'
 import mangosteenSvg from '../assets/icons/mangosteen.svg'
 import NavBar from '../components/navBar.vue'
 import { ref, reactive } from 'vue'
-import { sendCode } from '../api/login'
+import { sendCode,login } from '../api/login'
+import { Toast } from 'vant';
+import 'vant/es/toast/style';
+import { useRouter } from 'vue-router'
 // 表单数据
 const formData = reactive({
   email: '',
   code:''
 })
-// 点击最终提交
-const onSubmit = (val: any) => {
-  console.log(val)
-}
-
 // 倒计时显示/隐藏
 const countDownVisible =  ref(false)
 // 表单规则
@@ -85,6 +83,33 @@ const onSendCode = () => {
       // 校验不通过 
       console.log('校验不通过')
   })
+}
+const router = useRouter()
+const loginLoading = ref(false)
+// 点击最终登录按钮
+const onSubmit = async (val: any) => {
+  // 1. 整个表单校验 (Vant自动会做校验)
+  // 2. 发登录请求
+  Toast.loading({
+  duration: 0, // 持续展示 toast
+  message: "登录中...",
+  forbidClick: true // 是否禁止背景点击
+  });
+  loginLoading.value = true
+  try {
+    const response = await login(formData)
+    console.log(response)
+    Toast.success("登录成功");
+    loginLoading.value = false
+    router.push('/start')
+  } catch (err:any) {
+    if (err.response.status === 422) {
+      Toast.fail("验证码不正确, 请重新输入");
+    } else {
+      Toast.fail("登录失败, 请稍后重试");
+    }
+    loginLoading.value = false
+  }
 }
 
 </script>

@@ -4,3 +4,8 @@ import { http } from '../request'
 export function sendCode(data:any) {
   return http.post('/validation_codes', data)
 }
+
+// 登录
+export function login(data: any) {
+  return http.post('/session', data)
+}
