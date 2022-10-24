@@ -49,7 +49,7 @@ import { ref, reactive } from 'vue'
 import { sendCode,login } from '../api/login'
 import { Toast } from 'vant';
 import 'vant/es/toast/style';
-import { useRouter } from 'vue-router'
+import { useRouter,useRoute } from 'vue-router'
 import storage from '../utils/storage'
 // 表单数据
 const formData = reactive({
@@ -86,6 +86,7 @@ const onSendCode = () => {
   })
 }
 const router = useRouter()
+const route = useRoute()
 const loginLoading = ref(false)
 // 点击最终登录按钮
 const onSubmit = async (val: any) => {
@@ -105,7 +106,14 @@ const onSubmit = async (val: any) => {
     
     Toast.success("登录成功");
     loginLoading.value = false
-    router.push('/start')
+    // 跳转到原来的页面(使用了 query)
+    const redirectRoute = route.query.redirectRoute
+    console.log(redirectRoute)
+    if (redirectRoute) {
+      router.push(decodeURIComponent(redirectRoute as string))
+    } else {
+      router.push('/start')
+    }
   } catch (err:any) {
     if (err.response.status === 422) {
       Toast.fail("验证码不正确, 请重新输入");
@@ -115,7 +123,7 @@ const onSubmit = async (val: any) => {
     loginLoading.value = false
   }
 }
-
+console.log(router.currentRoute.value.fullPath)
 </script>
 <style lang="scss" scoped>
   .eren-login {
