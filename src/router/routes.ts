@@ -1,13 +1,14 @@
 import { RouteRecordRaw } from 'vue-router';
 import Welcome from '../views/welcome.vue'
+import storage from '../utils/storage';
 export const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect:'/welcome/1',
+    redirect: '/welcome/1',
   },
   {
     path: '/welcome',
-    component: Welcome,
+    component: Welcome, 
     children: [
       { path: '1', component:() => import('../components/welcome/first.vue') },
       { path: '2', component:() => import('../components/welcome/second.vue') },

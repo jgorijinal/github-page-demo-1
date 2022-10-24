@@ -1,6 +1,6 @@
 <template>
   <div class="eren-login">
-    <nav-bar title="登录">
+    <nav-bar title="登录" @click-left="$router.back()">
     <template #leftIcon>
       <img :src="fanhuiSvg" alt="" class="fanhui">
     </template>
@@ -101,14 +101,14 @@ const onSubmit = async (val: any) => {
   try {
     // TODO : 有点别扭, 没有用状态管理
     const res = await login(formData)
-    console.log(res)
+    // console.log(res)
     storage.setItem('kwt', res.jwt)
     
     Toast.success("登录成功");
     loginLoading.value = false
     // 跳转到原来的页面(使用了 query)
     const redirectRoute = route.query.redirectRoute
-    console.log(redirectRoute)
+    // console.log(redirectRoute)
     if (redirectRoute) {
       router.push(decodeURIComponent(redirectRoute as string))
     } else {

@@ -13,13 +13,13 @@
     </main>
     <footer v-if="$route.path !== '/welcome/4'">
       <div class="fake">fake</div>
-      <div class="pass" @click="$router.push('/start')">跳过</div>
+      <div class="pass" @click="skipAll">跳过</div>
       <div class="next" @click="nextPageClick">下一页</div>
     </footer>
     <footer v-else>
       <div class="fake">fake</div>
       <div class="fake">跳过</div>
-      <div class="pass" @click="$router.push('/start')">完成</div>
+      <div class="pass" @click="skipAll">完成</div>
     </footer>
   </div>
 </template>
@@ -29,7 +29,7 @@ import logo from "../assets/icons/mangosteen.svg";
 import { useRoute, useRouter } from "vue-router";
 import { useSwipe } from "../hooks/useSwipe";
 import {ref ,watch} from "vue";
-
+import storage from '../utils/storage' 
 const route = useRoute();
 const router = useRouter();
 const nextPageClick = () => {
@@ -41,7 +41,10 @@ const nextPageClick = () => {
   }
   router.push(newPath);
 };
-
+// 跳过广告
+const skipAll = () => {
+  router.push('/start')
+}
 const mainRef = ref<HTMLElement | null>(null);
 const { direction, swiping, distance } = useSwipe(mainRef);
 watch(direction, () => {
