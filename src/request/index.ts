@@ -1,7 +1,7 @@
-import axios, {AxiosInstance,AxiosRequestConfig } from 'axios'
+import axios, {AxiosInstance,AxiosRequestConfig,AxiosError } from 'axios'
 type JSONValue = string | number | null | boolean | JSONValue[] | { [key: string]: JSONValue };
 
-export class http {
+export default class Http {
   instance:AxiosInstance
   constructor(baseURL: string) {
     this.instance = axios.create({
@@ -21,3 +21,17 @@ export class http {
     return this.instance.request<R>({ ...config, url, params: query, method:'DELETE' })
   }
 }
+
+export const http = new Http('/api/v1')
+
+http.instance.interceptors.response.use((response) => {
+  return response
+}, (error:AxiosError) => {
+  // 直接断言成 AxiosError 类型, 那就就介意愉快的使用代码提示
+  if (error.response?.status === 429) {
+    // 弹出错误提示
+    console.log('请求过于频发, 请稍后再试')
+  }
+  // TODO: 提示对话框
+  return Promise.reject(error)
+})

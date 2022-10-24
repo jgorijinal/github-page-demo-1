@@ -45,8 +45,8 @@
 import fanhuiSvg from '../assets/icons/fanhui.svg'
 import mangosteenSvg from '../assets/icons/mangosteen.svg'
 import NavBar from '../components/navBar.vue'
-
-import { ref,reactive } from 'vue'
+import { ref, reactive } from 'vue'
+import { sendCode } from '../api/login'
 // 表单数据
 const formData = reactive({
   email: '',
@@ -75,11 +75,12 @@ const formRef = ref(null)
 // 发送验证码
 const onSendCode = () => {
     // 校验邮箱, 然后发送验证码
-    (formRef.value as any).validate('email').then(() => {
+    (formRef.value as any).validate('email').then(async () => {
       countDownVisible.value = true
       // TODO : 发送验证码
-      console.log('发送验证码')
-
+      const result = await sendCode({ email: formData.email })
+      console.log('发送验证码成功')
+      console.log(result)
     }).catch(() => {
       // 校验不通过 
       console.log('校验不通过')
