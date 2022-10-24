@@ -50,6 +50,7 @@ import { sendCode,login } from '../api/login'
 import { Toast } from 'vant';
 import 'vant/es/toast/style';
 import { useRouter } from 'vue-router'
+import storage from '../utils/storage'
 // 表单数据
 const formData = reactive({
   email: '',
@@ -97,9 +98,11 @@ const onSubmit = async (val: any) => {
   });
   loginLoading.value = true
   try {
-    // TODO : 对于 
-    const response = await login(formData)
-    console.log(response)
+    // TODO : 有点别扭, 没有用状态管理
+    const res = await login(formData)
+    console.log(res)
+    storage.setItem('kwt', res.jwt)
+    
     Toast.success("登录成功");
     loginLoading.value = false
     router.push('/start')
