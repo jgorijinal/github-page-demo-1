@@ -24,8 +24,8 @@ export default class Http {
 
 export const http = new Http('/api/v1')
 
-http.instance.interceptors.response.use((response) => {
-  return response
+http.instance.interceptors.response.use((res) => {
+  return res.data
 }, (error:AxiosError) => {
   // 直接断言成 AxiosError 类型, 那就就介意愉快的使用代码提示
   if (error.response?.status === 429) {
