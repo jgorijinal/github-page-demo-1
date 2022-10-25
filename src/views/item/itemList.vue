@@ -33,7 +33,7 @@ import overlayWithRoute from '../../components/overlayWithRoute.vue'
 import itemSummary from './components/itemSummary.vue'
 import datePicker from '../../components/datePicker.vue'
 import { ref } from 'vue'
-import { getThisMonth,getLastMonth,getThisYear } from '../../utils/dateCalc'
+import { getThisMonth, getLastMonth, getThisYear } from '../../utils/dateCalc'
 // 左侧菜单显示/隐藏
 const overlayVisible = ref(false)
 // 标签页激活项
@@ -47,6 +47,8 @@ const customDate = ref({
 const dateChanged = (x:any) => {
   customDate.value = x
 }
+
+
 </script>
 <style lang="scss" scoped>
 .left-icon-img {

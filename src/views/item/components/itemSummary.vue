@@ -6,17 +6,18 @@
       <li><span>净收入</span><span>28</span></li>
     </ul>
     <ul class="item-summary-list">
-      <li class="item-summary-list-item" v-for="item in data" :key="item.id">
+      <li class="item-summary-list-item" v-for="item in items" :key="item.id">
         <div class="sign">
-          <span>{{item.emoji}}</span>
+          <span>{{item.tags[0].sign}}</span>
         </div>
         <div class="text">
           <div class="tagAndAmount">
-            <span class="tag">{{item.tagName}}</span>
-            <span class="amount">{{item.amount}}</span>
+            <span class="tag">{{item.tags[0].name}}</span>
+            <span class="amount" :class="{isExpenses:item.kind === 'expenses'}">{{item.amount}}</span>
           </div>
           <div class="time">
-            {{item.time}}
+            <span>{{item.kind === 'income' ? '收入' : '支出'}}</span>
+          {{ formatDate(item.tags[0].updated_at)}}
           </div>
         </div>
       </li>
@@ -25,17 +26,32 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
+import { getItems } from '../../../api/items'
+import formatDate from '../../../utils/formatDate'
+import dayjs from 'dayjs'
 interface ItemSummaryProps {
   startDate: string
   endDate:string
 }
 const props = defineProps<ItemSummaryProps>()
 
-const data = ref([
-  { id:1,emoji: 'xxx', tagName: '旅行', amount: '$100', time: '2020-01-01 12:39' },
-  { id:2,emoji: 'xxx', tagName: '旅行', amount: '$100', time: '2020-01-01 12:39' },
-  { id:3,emoji:'xxx',tagName:'旅行',amount:'$100',time:'2020-01-01 12:39'}
-])
+const page = ref(0)
+const hasMore = ref(false)
+const items = ref<any>([])
+const getAllItems = async () => {
+  const res = await getItems({
+    created_after: dayjs(props.startDate).toDate(),
+    created_before: dayjs(props.endDate).toDate(),  
+    page:page.value + 1
+  })
+  const { resources, pager } = res
+  items.value.push(...resources)
+  hasMore.value = (pager.page - 1) * pager.per_page + resources.length < pager.count
+  console.log(items.value)
+  console.log(hasMore.value)
+}
+getAllItems()
+console.log(dayjs(props.startDate).toDate())
 </script>
 <style lang="scss" scoped>
 .item-summary{
@@ -79,10 +95,14 @@ const data = ref([
         .tagAndAmount{
           display: flex;
           justify-content: space-between;
+          padding-bottom:4px;
           .tag{ font-size:18px;}
           .amount{
-            color:#0eba25;
+            color:#08d223;
             font-size:18px;
+            &.isExpenses{
+              color:#da4f3d;
+            }
           }
         }
         .time{
