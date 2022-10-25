@@ -9,3 +9,8 @@ export function getTags(query:any) {
 export function createTag(data:any) {
   return http.post('/tags', data)
 }
+
+// 获取标签信息
+export function getTagInfo(id:string) {
+  return http.get(`/tags/${id}`)
+} 

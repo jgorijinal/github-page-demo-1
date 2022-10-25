@@ -48,14 +48,14 @@ import fanhuiSvg from '../../assets/icons/fanhui.svg'
 import { validate, Rules} from '../../utils/validate'
 import { reactive, ref,computed } from 'vue'
 import { useRoute,useRouter } from 'vue-router'
-import { createTag } from '../../api/tags'
+import { createTag,getTagInfo } from '../../api/tags'
 import { Toast } from 'vant';
 import 'vant/es/toast/style';
 
 const route = useRoute()
 const router = useRouter()
 // 表单数据
-const formData = reactive({
+let formData = reactive({
   tagName: '',
   emoji: '',
   kind:route.query.kind!.toString()
@@ -77,6 +77,22 @@ const errors = ref<any>([])
 const isEdit = computed(() => {
   return Boolean(route.params.id)
 })
+
+// ---- 编辑逻辑 ----- 
+// 当前标签的 id
+const tag_id = route.params.id.toString()
+const getTagInformation = async (id:string) => {
+  const { resource } = await getTagInfo(id)
+  formData.tagName = resource.name
+  formData.emoji = resource.sign
+  formData.kind = resource.kind
+}
+// 如果是编辑页面, 就发请求获取 id 对应标签的信息
+if (isEdit.value) {
+  getTagInformation(tag_id)
+}
+
+
 //表单提交
 const onSubmit = async (e:Event) => {
   e.preventDefault()
