@@ -66,6 +66,8 @@ import inputPad from '../../components/inputPad.vue'
 // svg
 import fanhuiSvg from '../../assets/icons/fanhui.svg'
 import add2Svg from '../../assets/icons/add2.svg'
+import { Toast } from 'vant';
+import 'vant/es/toast/style';
 // vue
 import { ref,computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
@@ -110,8 +112,18 @@ watch(activeName, () => {
   tag_ids.value = []
 })
 // 监听键盘提交事件
-const submitHandle = (amount:string) => {
-  console.log(amount)
+const submitHandle = (obj: any) => {
+  if ((tag_ids.value).length === 0) {
+    Toast.fail('至少选择一个标签哦~')
+    return
+  }
+  const result = {
+    amount: obj.amount,
+    happen_at:obj.happen_at,
+    kind: activeName.value === '支出' ? 'expenses' : 'income',
+    tag_ids:tag_ids.value
+  }
+  console.log(result)
 }
 </script>
 <style lang="scss" scoped>
@@ -144,6 +156,7 @@ img {
     width:20vw;
     height:20vw; 
     transition: all 0.3s ease;
+    margin-bottom:8px;
     &.add {
       justify-content: flex-start;
       background-color:transparent;
@@ -156,7 +169,7 @@ img {
     border-radius:50%;
     width:14vw;
     height:14vw;
-    background-color: #edecec;
+    background-color: #f7f3f3;
     display: flex;
     justify-content: center;
     border:1px solid #3465e0;

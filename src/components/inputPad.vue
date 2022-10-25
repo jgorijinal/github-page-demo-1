@@ -28,10 +28,12 @@
 import dateSvg from '../assets/icons/date.svg'
 import { ref,watch } from 'vue';
 import formatDate from '../utils/formatDate'
+import { Toast } from 'vant';
+import 'vant/es/toast/style';
 // 弹出层
 const popupVisible = ref(false)
 // 选择的日期
-const currentDate = ref();
+const currentDate = ref(new Date());
 const minDate = new Date(2020, 0, 1)
 const maxDate = new Date(2025, 10, 1)
 
@@ -61,8 +63,12 @@ const buttons = [
   { text: '·', clickFn: () => { appendText('.')} },
   { text: '清空', clickFn: () => {amount.value = '0' } },
   {
-    text: '提交', clickFn: () => { 
-      emits('click-submit' , amount.value)
+    text: '提交', clickFn: () => {
+      if (Number(amount.value) === 0) {
+        Toast.fail('输入金额哦~')
+        return
+      }
+      emits('click-submit', { amount: Number(amount.value), happen_at: currentDate.value })
   } },
 ]
 // 按键逻辑
