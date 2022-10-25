@@ -18,7 +18,7 @@ router.beforeEach((to, from, next) => {
       next()
     } else {
       Toast.fail("请您先登录哦");
-      next('/login')
+      next(`/login?redirectRoute=${to.path}`)
     }
   }
 })
