@@ -69,6 +69,8 @@ const buttons = [
         return
       }
       emits('click-submit', { amount: Number(amount.value), happen_at: currentDate.value })
+      // 重置数据
+      currentDate.value = new Date()
   } },
 ]
 // 按键逻辑

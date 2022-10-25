@@ -68,6 +68,7 @@ import fanhuiSvg from '../../assets/icons/fanhui.svg'
 import add2Svg from '../../assets/icons/add2.svg'
 import { Toast } from 'vant';
 import 'vant/es/toast/style';
+import { createItem } from '../../api/items'
 // vue
 import { ref,computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
@@ -112,7 +113,8 @@ watch(activeName, () => {
   tag_ids.value = []
 })
 // 监听键盘提交事件
-const submitHandle = (obj: any) => {
+const submitHandle = async (obj: any) => {
+  // 至少选择一个标签
   if ((tag_ids.value).length === 0) {
     Toast.fail('至少选择一个标签哦~')
     return
@@ -124,6 +126,17 @@ const submitHandle = (obj: any) => {
     tag_ids:tag_ids.value
   }
   console.log(result)
+  // 发起网络请求
+  try {
+    const res = await createItem(result)
+    Toast.success('成功创建一笔账~')
+    tag_ids.value = []
+    
+  } catch (err) {
+    console.log(err)
+  }
+
+  
 }
 </script>
 <style lang="scss" scoped>
