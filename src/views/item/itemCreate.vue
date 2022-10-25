@@ -10,20 +10,20 @@
     <tabs v-model:active="activeName">
       <tab name="支出">
         <div class="eren-tag-wrapper">
-        <div class="eren-tag-container add" @click="$router.push('/tag/create?kind=expenses')">
-          <img :src="add2Svg" alt="" class="eren-tag-emoji add">
-          <span class="eren-tag-name">
-            新增标签
-          </span>
-        </div>
-        <div class="eren-tag-container" v-for="tag in expensesTags" :key="tag.id" @click="$router.push(`/tag/${tag.id}/edit?kind=expenses`)">
-          <span class="eren-tag-emoji">
-            {{tag.emoji}}
-          </span>
-          <span class="eren-tag-name">
-            {{tag.tagName}}
-          </span>
-        </div>
+          <div class="eren-tag-container add" @click="$router.push('/tag/create?kind=expenses')">
+            <img :src="add2Svg" alt="" class="eren-tag-emoji add">
+            <span class="eren-tag-name">
+              新增标签
+            </span>
+          </div>
+          <div class="eren-tag-container" v-for="tag in expensesTags" :key="tag.id" @click="$router.push(`/tag/${tag.id}/edit?kind=expenses`)">
+            <span class="eren-tag-emoji">
+              {{tag.sign}}
+            </span>
+            <span class="eren-tag-name">
+              {{tag.name}}
+            </span>
+          </div>
       </div>
       </tab>
       <tab name="收入">
@@ -34,12 +34,12 @@
             新增标签
           </span>
         </div>
-        <div class="eren-tag-container" v-for="tag in inComeTags" :key="tag.id" @click="$router.push(`/tag/${tag.id}/edit?kind=income`)">
+        <div class="eren-tag-container" v-for="tag in incomeTags" :key="tag.id" @click="$router.push(`/tag/${tag.id}/edit?kind=income`)">
           <span class="eren-tag-emoji">
-            {{tag.emoji}}
+            {{tag.sign}}
           </span>
           <span class="eren-tag-name">
-            {{tag.tagName}}
+            {{tag.name}}
           </span>
         </div>
       </div>
@@ -74,33 +74,23 @@ const activeName = ref('支出')
 const submitHandle = (amount:string) => {
   console.log(amount)
 }
-// 标签列表 - 支出
-const expensesTags = ref([
-  { id: 1, tagName: '餐费', emoji: 'xxx' },
-  { id: 2, tagName: '打车费', emoji: 'yyy' },
-  { id: 3, tagName: '聚餐', emoji: 'zzz' },
-  { id: 8, tagName: '餐费', emoji: 'xxx' },
-])
-// 标签列表 - 收入
-const inComeTags = ref([
-  { id: 4, tagName: '工资', emoji: 'vvv' },
-  { id:5, tagName: '彩票', emoji: 'bbb' },
-  {id:6, tagName: '抢劫',emoji:'jjj'}
-])
-// // 获取支出标签
-// const getExpenseTags = async() => {
-//   const expenseTags = await getTags({ page: 1, kind: 'expense' }) 
-//   console.log(expenseTags)
-// }
+const expensesTags = ref<any>([])
+const incomeTags = ref<any>([])
+const page = ref(0) // 当前页码
+// 获取支出标签
+const getExpenseTags = async() => {
+  const { resources, pager } = await getTags({ page: (page.value + 1), kind: 'expenses' }) 
+  expensesTags.value = resources
+}
 
-// // 获取收入标签
-// const getIncomeTags = async() => {
-//   const incomeTags = await getTags({ page: 1, kind: 'income' }) 
-//   console.log(incomeTags)
-// }
+// 获取收入标签
+const getIncomeTags = async() => {
+  const { resources,pager } = await getTags({ page: (page.value + 1), kind: 'income' }) 
+  incomeTags.value = resources
+}
 
-// getExpenseTags()
-// getIncomeTags()
+getExpenseTags()
+getIncomeTags()
 </script>
 <style lang="scss" scoped>
 img {
@@ -121,6 +111,7 @@ img {
     flex-wrap: wrap;
     overflow-y: auto;
     padding:10px 0 10px 0 ; 
+    align-content: flex-start;
   }
   &-container {
     display: flex;
