@@ -19,7 +19,10 @@
           <div class="eren-tag-container" 
           v-for="tag,index in expensesTags" :key="tag.id" 
           @click="onSelect(tag)" 
-          :class="{selected:tag_ids.includes(tag.id)}">
+          :class="{selected:tag_ids.includes(tag.id)}"
+          @touchstart="onTouchStart(tag.id)" 
+          @touchend="onTouchend"  
+          >
             <span class="eren-tag-emoji">
               {{tag.sign}}
             </span>
@@ -38,7 +41,10 @@
           </span>
         </div>
         <div class="eren-tag-container" v-for="tag in incomeTags" :key="tag.id" @click="onSelect(tag)" 
-          :class="{selected:tag_ids.includes(tag.id)}">
+          :class="{selected:tag_ids.includes(tag.id)}"
+          @touchstart="onTouchStart(tag.id)" 
+          @touchend="onTouchend"  
+          >
           <span class="eren-tag-emoji">
             {{tag.sign}}
           </span>
@@ -56,8 +62,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-// $router.push(`/tag/${tag.id}/edit?kind=expenses`)
-// $router.push(`/tag/${tag.id}/edit?kind=income`)
 // 组件
 import navBar from '../../components/navBar.vue'
 import tabs from '../../components/tabs.vue'
@@ -134,10 +138,23 @@ const submitHandle = async (obj: any) => {
     // 重置相关数据
     tag_ids.value = []
     inputPadRef.value.resetData()
-
+    // TODO: 成功记账之后可以跳转到记录页面
   } catch (err) {
     console.log(err)
   }
+}
+// 长按跳转
+const longPress = (id:number) => {
+  activeName.value === '支出' ? router.push(`/tag/${id}/edit?kind=expenses`)  : router.push(`/tag/${id}/edit?kind=income`)
+}
+let timer:any = null
+const onTouchStart = (id:number) => {
+  timer = setTimeout(() => {
+    longPress(id)
+  },400)
+}
+const onTouchend = () => {
+  clearTimeout(timer)
 }
 </script>
 <style lang="scss" scoped>
@@ -170,7 +187,6 @@ img {
     width:20vw;
     height:20vw; 
     transition: all 0.3s ease;
-    margin-bottom:8px;
     &.add {
       justify-content: flex-start;
       background-color:transparent;
@@ -193,6 +209,7 @@ img {
     }
   }
   &-name {
+    margin-top:4px;
     font-size:14px;
     color:rgb(61, 59, 59)
   }
