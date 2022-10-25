@@ -31,7 +31,7 @@ import formatDate from '../utils/formatDate'
 // 弹出层
 const popupVisible = ref(false)
 // 选择的日期
-const currentDate = ref(new Date(2021, 0, 17));
+const currentDate = ref();
 const minDate = new Date(2020, 0, 1)
 const maxDate = new Date(2025, 10, 1)
 

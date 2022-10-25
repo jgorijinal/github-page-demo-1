@@ -37,7 +37,8 @@
             新增标签
           </span>
         </div>
-        <div class="eren-tag-container" v-for="tag in incomeTags" :key="tag.id" @click="onSelect">
+        <div class="eren-tag-container" v-for="tag in incomeTags" :key="tag.id" @click="onSelect(tag)" 
+          :class="{selected:tag_ids.includes(tag.id)}">
           <span class="eren-tag-emoji">
             {{tag.sign}}
           </span>
@@ -66,7 +67,7 @@ import inputPad from '../../components/inputPad.vue'
 import fanhuiSvg from '../../assets/icons/fanhui.svg'
 import add2Svg from '../../assets/icons/add2.svg'
 // vue
-import { ref,computed } from 'vue'
+import { ref,computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { getTags } from '../../api/tags'
@@ -102,9 +103,12 @@ const onSelect = (tag:any) => {
   } else {
     tag_ids.value = tag_ids.value.filter(id => id !== tag.id)
   }
-
   console.log(tag_ids.value)
 }
+// 选择不同类型前 , 先清空选择标签数组
+watch(activeName, () => {
+  tag_ids.value = []
+})
 // 监听键盘提交事件
 const submitHandle = (amount:string) => {
   console.log(amount)
