@@ -105,15 +105,25 @@ const onSubmit = async (e:Event) => {
       sign:formData.emoji,
       kind:formData.kind
       })
-    Toast.success('成功创建标签') 
+    Toast.success('创建成功') 
     router.back()
     } else {
       // 编辑标签
       const res = await editTag(tag_id, { name: formData.tagName, sign: formData.emoji })
       console.log(res)
-      Toast.success('已修改标签信息')
+      Toast.success('已修改')
       router.back()
     }
+  }
+}
+// 删除标签
+const deleteTagClick = async () => {
+  try {
+    await deleteTag(tag_id)
+    router.push('/item/create')
+    Toast.success('删除成功')
+  } catch (err) {
+    console.log(err)
   }
 }
 </script>
