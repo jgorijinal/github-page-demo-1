@@ -51,7 +51,7 @@
     </tabs>
     <!--数字键盘-->
     <div class="eren-inputPad" >
-      <inputPad @click-submit="submitHandle"/>
+      <inputPad @click-submit="submitHandle" ref="inputPadRef"/>
     </div>
   </div>
 </template>
@@ -112,6 +112,7 @@ const onSelect = (tag:any) => {
 watch(activeName, () => {
   tag_ids.value = []
 })
+const inputPadRef = ref()
 // 监听键盘提交事件
 const submitHandle = async (obj: any) => {
   // 至少选择一个标签
@@ -130,13 +131,13 @@ const submitHandle = async (obj: any) => {
   try {
     const res = await createItem(result)
     Toast.success('成功创建一笔账~')
+    // 重置相关数据
     tag_ids.value = []
-    
+    inputPadRef.value.resetData()
+
   } catch (err) {
     console.log(err)
   }
-
-  
 }
 </script>
 <style lang="scss" scoped>

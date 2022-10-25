@@ -69,10 +69,16 @@ const buttons = [
         return
       }
       emits('click-submit', { amount: Number(amount.value), happen_at: currentDate.value })
-      // 重置数据
-      currentDate.value = new Date()
   } },
 ]
+// 重置数据函数 (给父组件使用 ref 调用)
+const resetData = () => {
+  currentDate.value = new Date()
+  amount.value = '0'
+}
+defineExpose({
+  resetData
+})
 // 按键逻辑
 const amount = ref('0')
 
