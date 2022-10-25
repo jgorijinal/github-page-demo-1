@@ -47,12 +47,20 @@ import EmojiSelect from '../../components/emojiSelect.vue'
 import fanhuiSvg from '../../assets/icons/fanhui.svg'
 import { validate, Rules} from '../../utils/validate'
 import { reactive, ref,computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute,useRouter } from 'vue-router'
+import { createTag } from '../../api/tags'
+import { Toast } from 'vant';
+import 'vant/es/toast/style';
+
+const route = useRoute()
+const router = useRouter()
 // 表单数据
 const formData = reactive({
   tagName: '',
-  emoji:''
+  emoji: '',
+  kind:route.query.kind!.toString()
 })
+// console.log(route.query.kind!.toString())
 const rules:Rules<FormData> = [
   { key: 'tagName', required: true, message: '必填' },
   { key: 'tagName', pattern: /^.{1,4}$/, message: '请填入1~4个字符' },
@@ -65,18 +73,32 @@ type FormData =  {
 
 // 表单验证报错结果
 const errors = ref<any>([])
-//表单提交
-const onSubmit = (e:Event) => {
-  e.preventDefault()
-  errors.value = validate<FormData>(formData, rules)
-  console.log(errors.value)
-}
-
-const route = useRoute()
 // 是否编辑状态
 const isEdit = computed(() => {
   return Boolean(route.params.id)
 })
+//表单提交
+const onSubmit = async (e:Event) => {
+  e.preventDefault()
+  errors.value = validate<FormData>(formData, rules)
+  if (JSON.stringify(errors.value) === '{}') {
+    // 没有错误, 可以点击确定按钮
+    if (!isEdit.value) {
+      // 创建标签
+      const result =  await createTag({
+      name:formData.tagName,
+      sign:formData.emoji,
+      kind:formData.kind
+      })
+    Toast.success('成功创建标签') 
+    router.back()
+    } else {
+      // 编辑标签
+      // TODO
+    }
+  }
+}
+
 </script>
 <style lang="scss" scoped>
 img {

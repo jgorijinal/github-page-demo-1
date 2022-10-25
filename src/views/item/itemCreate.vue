@@ -10,13 +10,13 @@
     <tabs v-model:active="activeName">
       <tab name="支出">
         <div class="eren-tag-wrapper">
-        <div class="eren-tag-container add" @click="$router.push('/tag/create')">
+        <div class="eren-tag-container add" @click="$router.push('/tag/create?kind=expenses')">
           <img :src="add2Svg" alt="" class="eren-tag-emoji add">
           <span class="eren-tag-name">
             新增标签
           </span>
         </div>
-        <div class="eren-tag-container" v-for="tag in expensesTags" :key="tag.id" @click="$router.push(`/tag/${tag.id}/edit`)">
+        <div class="eren-tag-container" v-for="tag in expensesTags" :key="tag.id" @click="$router.push(`/tag/${tag.id}/edit?kind=expenses`)">
           <span class="eren-tag-emoji">
             {{tag.emoji}}
           </span>
@@ -28,13 +28,13 @@
       </tab>
       <tab name="收入">
         <div class="eren-tag-wrapper">
-        <div class="eren-tag-container add" @click="$router.push('/tag/create')">
+        <div class="eren-tag-container add" @click="$router.push('/tag/create?kind=income')">
           <img :src="add2Svg" alt="" class="eren-tag-emoji add">
           <span class="eren-tag-name">
             新增标签
           </span>
         </div>
-        <div class="eren-tag-container" v-for="tag in inComeTags" :key="tag.id">
+        <div class="eren-tag-container" v-for="tag in inComeTags" :key="tag.id" @click="$router.push(`/tag/${tag.id}/edit?kind=income`)">
           <span class="eren-tag-emoji">
             {{tag.emoji}}
           </span>
@@ -64,6 +64,7 @@ import add2Svg from '../../assets/icons/add2.svg'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+import { getTags } from '../../api/tags'
 const router = useRouter()
 const leftClickHandle = () => {
   router.back()
@@ -86,6 +87,20 @@ const inComeTags = ref([
   { id:5, tagName: '彩票', emoji: 'bbb' },
   {id:6, tagName: '抢劫',emoji:'jjj'}
 ])
+// // 获取支出标签
+// const getExpenseTags = async() => {
+//   const expenseTags = await getTags({ page: 1, kind: 'expense' }) 
+//   console.log(expenseTags)
+// }
+
+// // 获取收入标签
+// const getIncomeTags = async() => {
+//   const incomeTags = await getTags({ page: 1, kind: 'income' }) 
+//   console.log(incomeTags)
+// }
+
+// getExpenseTags()
+// getIncomeTags()
 </script>
 <style lang="scss" scoped>
 img {
