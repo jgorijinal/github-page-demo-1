@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="action-buttons" v-if="isEdit">
-      <e-button class="action" >删除标签</e-button>
+      <e-button class="action" @click="deleteTagClick">删除标签</e-button>
       <e-button class="action">删除标签和对应的记账</e-button>
     </div>
   </form>
@@ -48,7 +48,7 @@ import fanhuiSvg from '../../assets/icons/fanhui.svg'
 import { validate, Rules} from '../../utils/validate'
 import { reactive, ref,computed } from 'vue'
 import { useRoute,useRouter } from 'vue-router'
-import { createTag,getTagInfo } from '../../api/tags'
+import { createTag,getTagInfo,editTag ,deleteTag} from '../../api/tags'
 import { Toast } from 'vant';
 import 'vant/es/toast/style';
 
@@ -92,7 +92,6 @@ if (isEdit.value) {
   getTagInformation(tag_id)
 }
 
-
 //表单提交
 const onSubmit = async (e:Event) => {
   e.preventDefault()
@@ -110,11 +109,13 @@ const onSubmit = async (e:Event) => {
     router.back()
     } else {
       // 编辑标签
-      // TODO
+      const res = await editTag(tag_id, { name: formData.tagName, sign: formData.emoji })
+      console.log(res)
+      Toast.success('已修改标签信息')
+      router.back()
     }
   }
 }
-
 </script>
 <style lang="scss" scoped>
 img {

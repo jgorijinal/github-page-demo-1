@@ -14,3 +14,13 @@ export function createTag(data:any) {
 export function getTagInfo(id:string) {
   return http.get(`/tags/${id}`)
 } 
+
+// 修改标签
+export function editTag(id:string , data:any) {
+  return http.patch(`/tags/${id}`,data)
+}
+
+// 删除标签
+export function deleteTag(id: string) {
+  return http.delete(`/tags/${id}`)
+}
