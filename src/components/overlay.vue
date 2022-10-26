@@ -26,6 +26,7 @@ const emits = defineEmits(['closeOverlay'])
 const clickOverlay = () => {
   emits('closeOverlay')
 }
+
 </script>
 <style lang="scss" scoped>
 .eren-overlay {
@@ -46,7 +47,7 @@ const clickOverlay = () => {
     width:14em;
     background-color: white;
     height: 100%;
-    z-index:16;
+    z-index:30;
     &-login {
       background-color: #0c3bb4;
       color:white;

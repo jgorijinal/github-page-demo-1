@@ -50,8 +50,8 @@ const dateChanged = (date:any) => {
   customDate.value = date
 }
 
-// 类型选择 收入income / 支出 expense
-const activeSelect = ref('expense')
+// 类型选择 收入income / 支出 expenses
+const activeSelect = ref('expenses')
 </script>
 <style lang="scss" scoped>
 img{

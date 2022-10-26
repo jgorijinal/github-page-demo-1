@@ -9,3 +9,8 @@ export function sendCode(data:any) {
 export function login(data: any) {
   return http.post('/session', data)
 }
+
+// 获取当前用户信息
+export function getUserInfo() {
+  return http.get('/me')
+}
