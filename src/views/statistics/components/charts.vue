@@ -11,7 +11,7 @@
     </div>
     <!--图表-->
     <line-echart :x-labels="xLabels" :values="values"></line-echart>
-    <pie-echart :pie-data="[{name:'name1',value:'123'},{name:'name2',value:'564'}]"/>
+    <pie-echart :pie-data="pieData"/>
     <!--进度条-->
     <progress-bar /> 
   </div>
@@ -69,14 +69,22 @@ getItems()
 watch(() => props.modelValue, () => {
   getItems()
 })
-// 折线图数据 x轴, y轴
+// 折线图数据 : 轴, y轴
 const xLabels = computed(() => {
   return items.value.map(item => item.tag.name)
 })
 const values = computed(() => {
   return items.value.map(item => item.amount)
 })
-
+// 饼图的数据:  {name:'xxx',value:'xxx'} 组成的数组
+const pieData = computed(() => {
+  return items.value.map(item => {
+    return {
+      name: item.tag.name,
+      value:item.amount
+    }
+  })
+})
 </script>
 <style lang="scss" scoped>
 .eren-chart-container{
