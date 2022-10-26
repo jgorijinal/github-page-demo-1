@@ -7,7 +7,7 @@
     <div class="progress-bar-text">
       <div class="progress-bar-text-info">
         <span>{{item.tag.name}}</span>
-        <span>{{item.amount}}</span>
+        <span>{{item.amount}} 元</span>
       </div>
       <van-progress :percentage="item.percentage.slice(0,-1)" color="#53a868" track-color="#cccccc"/>
     </div>
@@ -15,25 +15,25 @@
 </template>
 </template>
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, PropType } from 'vue'
 // 数据示例
 const data = [
   { tag: { id: 1, name: '房租', sign: 'x' }, amount: 100 },
   { tag: { id: 2, name: '吃饭', sign: 'x' }, amount: 120 },
   { tag: {id:3,name:'娱乐',sign:'x'},amount: 140 },
 ]
-// const props = defineProps({
-//   data: {
-//     type:Object
-//   }
-// })
+const props = defineProps({
+  data: {
+    type:Object as PropType<any>
+  }
+})
 // 每个数据加工加入百分比
 const betterData = computed(() => {
   let total = 0
-  data.forEach((item) => {
+  props.data.forEach((item) => {
     total += item.amount
   })
-  return data.map(item => {
+  return props.data.map(item => {
     return {
       ...item, percentage: Math.round((item.amount / total) * 100) + '%'
     }

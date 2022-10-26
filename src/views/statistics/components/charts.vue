@@ -13,7 +13,7 @@
     <line-echart :x-labels="xLabels" :values="values"></line-echart>
     <pie-echart :pie-data="pieData"/>
     <!--进度条-->
-    <progress-bar /> 
+    <progress-bar :data="items"/> 
   </div>
 </template>
 <script setup lang="ts">
@@ -45,7 +45,7 @@ const totalAmount= ref(0)
 const getItems = async () => {
   const toast = Toast.loading({
     duration: 0, // 持续展示 toast
-    message: "登录中...",
+    message: "数据加载中...",
     forbidClick: true // 是否禁止背景点击
   });
   try {
@@ -57,7 +57,6 @@ const getItems = async () => {
   })
     items.value = groups
     totalAmount.value = total 
-    console.log(items.value)
   } catch (err) {
     console.log(err)
   }
