@@ -36,7 +36,7 @@
     </div>
     <div class="action-buttons" v-if="isEdit">
       <e-button class="action" @click="deleteTagClick">删除标签</e-button>
-      <e-button class="action">删除标签和对应的记账</e-button>
+      <e-button class="action" @click="deleteTagAndList">删除标签和对应的记账</e-button>
     </div>
   </form>
 </template>
@@ -96,7 +96,7 @@ if (isEdit.value) {
 
 //表单提交
 const onSubmit = async (e:Event) => {
-  e.preventDefault()
+  // e.preventDefault()
   errors.value = validate<FormData>(formData, rules)
   if (JSON.stringify(errors.value) === '{}') {
     // 没有错误, 可以点击确定按钮
@@ -114,13 +114,15 @@ const onSubmit = async (e:Event) => {
       // 编辑标签
       const res = await editTag(tag_id, { name: formData.tagName, sign: formData.emoji })
       console.log(res)
+      console.log('?????????')
       Toast.success('已修改')
       router.back()
     }
   } 
 }
 // 删除标签
-const deleteTagClick = async () => {
+const deleteTagClick = async (e:Event) => {
+  e.preventDefault()
   try {
     await deleteTag(tag_id)
     router.push('/item/create')
@@ -128,6 +130,11 @@ const deleteTagClick = async () => {
   } catch (err) {
     console.log(err)
   }
+}
+// 删除标签和有关账单
+const deleteTagAndList = (e:Event) => {
+  e.preventDefault()
+  
 }
 </script>
 <style lang="scss" scoped>
@@ -178,7 +185,7 @@ img {
     font-size: 12px;
   }
 }
-::v-deep.action-buttons {
+:deep(.action-buttons) {
   justify-content: space-between;
   margin-top:8px;
   display: flex;
