@@ -48,9 +48,10 @@ const clickTab = (item:any) => {
   .active {
     // transition: all 0.4s ease;
     position:relative;
-    // border:4px solid #f7f1e3
+    border:4px solid #273c75;
     background-color:#ffffff ;
     color:black;
+    font-weight: bold;
     // font-weight: bold;
   }
   &-tab {

@@ -34,7 +34,6 @@ import { getItems } from '../../../api/items'
 import formatDate from '../../../utils/formatDate'
 import { Toast } from 'vant';
 import 'vant/es/toast/style';
-import exp from 'constants';
 
 interface ItemSummaryProps {
   startDate: string

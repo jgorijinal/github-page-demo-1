@@ -102,6 +102,7 @@ const pieData = computed(() => {
 watch(() => props.endDate, () => {
   getItems()
 })
+console.log(items.value)
 </script>
 <style lang="scss" scoped>
 .eren-chart-container{
