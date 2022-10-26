@@ -5,6 +5,7 @@
       <li><span>支出</span><span>100</span></li>
       <li><span>净收入</span><span>28</span></li>
     </ul>
+    <div class="tips" v-if="items.length === 0">目前还没有记录</div>
     <ul class="item-summary-list">
       <li class="item-summary-list-item" v-for="item in items" :key="item.id">
         <div class="sign">
@@ -22,15 +23,7 @@
         </div>
       </li>
     </ul>
-    <!-- <van-pagination
-  v-model="page"
-  :total-items="total"
-  :show-page-size="2"
-  force-ellipses
-  :items-per-page="10"
-  @change="getAllItems"
-/> -->
-<van-pagination v-model="page" :page-count="pageCount" mode="simple"   @change="getAllItems"/>
+      <van-pagination v-model="page" :page-count="pageCount" mode="simple"   @change="getAllItems"/>
   </div>
 </template>
 <script setup lang="ts">
@@ -83,6 +76,12 @@ watch(() => {
 </script>
 <style lang="scss" scoped>
 .item-summary{
+  .tips {
+    display: flex;
+    justify-content: center;
+    padding:30px 0;
+    color:rgb(173, 168, 168);
+  }
   padding:10px;
   &-total{
     height:70px;
