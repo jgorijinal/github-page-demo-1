@@ -59,6 +59,7 @@ const clickTab = (item:any) => {
     font-size: 16px;
     &-name {
       // border:4px solid #273c75;
+      border-bottom: 1px solid white;
       color:white;
       // border-radius: 4px;
       padding:8px 16px;

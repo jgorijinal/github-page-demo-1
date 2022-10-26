@@ -51,6 +51,8 @@ import { useRoute,useRouter } from 'vue-router'
 import { createTag,getTagInfo,editTag ,deleteTag} from '../../api/tags'
 import { Toast } from 'vant';
 import 'vant/es/toast/style';
+import { Notify } from 'vant';
+import 'vant/es/notify/style';
 
 const route = useRoute()
 const router = useRouter()
@@ -80,7 +82,7 @@ const isEdit = computed(() => {
 
 // ---- 编辑逻辑 ----- 
 // 当前标签的 id
-const tag_id = route.params.id.toString()
+const tag_id = route.params.id && route.params.id.toString()
 const getTagInformation = async (id:string) => {
   const { resource } = await getTagInfo(id)
   formData.tagName = resource.name
@@ -100,13 +102,14 @@ const onSubmit = async (e:Event) => {
     // 没有错误, 可以点击确定按钮
     if (!isEdit.value) {
       // 创建标签
-      const result =  await createTag({
+      await createTag({
       name:formData.tagName,
       sign:formData.emoji,
       kind:formData.kind
       })
-    Toast.success('创建成功') 
-    router.back()
+      Toast.success('创建成功')
+      router.back()
+      Notify({ type: 'primary', message: '长按标签即可进入编辑页面',duration: 2000});
     } else {
       // 编辑标签
       const res = await editTag(tag_id, { name: formData.tagName, sign: formData.emoji })

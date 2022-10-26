@@ -31,6 +31,7 @@
               {{tag.name}}
             </span>
           </div>
+          <span class="tag-tips" v-if="JSON.stringify(expensesTags) === '[]'">点击新增标签哦~</span>
       </div>
       </tab>
       <tab name="收入">
@@ -53,6 +54,7 @@
             {{tag.name}}
           </span>
         </div>
+        <span class="tag-tips" v-if="JSON.stringify(incomeTags) === '[]'">点击新增标签哦~</span>
       </div>
       </tab>
     </tabs>
@@ -80,6 +82,7 @@ import { ref,computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { getTags } from '../../api/tags'
+
 const router = useRouter()
 // 左侧菜单显示/隐藏
 const overlayVisible = ref(false)
@@ -89,15 +92,31 @@ const expensesTags = ref<any>([])
 const incomeTags = ref<any>([])
 const page = ref(0) // 当前页码
 // 获取支出标签
-const getExpenseTags = async() => {
-  const { resources, pager } = await getTags({ page: (page.value + 1), kind: 'expenses' }) 
-  expensesTags.value = resources
+const getExpenseTags = async () => {
+  const toast = Toast.loading({
+  duration: 0, // 持续展示 toast
+  message: "获取中...",
+  forbidClick: true // 是否禁止背景点击
+  });
+  try {
+    const { resources, pager } = await getTags({ page: (page.value + 1), kind: 'expenses' }) 
+    expensesTags.value = resources
+  } catch (err) {
+    console.log(err)
+  }
+  toast.clear()
 }
 
 // 获取收入标签
-const getIncomeTags = async() => {
+const getIncomeTags = async () => {
+  const toast = Toast.loading({
+  duration: 0, // 持续展示 toast
+  message: "获取中...",
+  forbidClick: true // 是否禁止背景点击
+  });
   const { resources,pager } = await getTags({ page: (page.value + 1), kind: 'income' }) 
   incomeTags.value = resources
+  toast.clear()
 }
 getExpenseTags()
 getIncomeTags()
@@ -112,7 +131,6 @@ const onSelect = (tag:any) => {
   } else {
     tag_ids.value = tag_ids.value.filter(id => id !== tag.id)
   }
-  console.log(tag_ids.value)
 }
 // 选择不同类型前 , 先清空选择标签数组
 watch(activeName, () => {
@@ -132,7 +150,6 @@ const submitHandle = async (obj: any) => {
     kind: activeName.value === '支出' ? 'expenses' : 'income',
     tag_ids:tag_ids.value
   }
-  console.log(result)
   // 发起网络请求
   try {
     const res = await createItem(result)
@@ -179,6 +196,17 @@ img {
     overflow-y: auto;
     padding:10px 0 10px 0 ; 
     align-content: flex-start;
+    border-top:1px solid white;
+    position:relative;
+    .tag-tips{
+      display: inline-block;
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      font-size:25px;
+      color:rgb(223, 219, 219)
+    }
   }
   &-container {
     display: flex;
