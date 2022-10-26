@@ -115,7 +115,6 @@ const onSubmit = async (e:Event) => {
       // 编辑标签
       const res = await editTag(tag_id, { name: formData.tagName, sign: formData.emoji })
       console.log(res)
-      console.log('?????????')
       Toast.success('已修改')
       router.back()
     }

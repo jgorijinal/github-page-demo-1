@@ -13,7 +13,9 @@
         </div>
         <div class="text">
           <div class="tagAndAmount">
-            <span class="tag">{{item.tags[0].name}}</span>
+            <div class="tag-wrapper">
+              <span class="tag" v-for="tag,index in item.tags" :key="index">{{tag.name}}</span>
+            </div>
             <span class="amount" :class="{isExpenses:item.kind === 'expenses'}">{{item.amount}} 元</span>
           </div>
           <div class="time">
@@ -147,6 +149,11 @@ const profit = computed(() => {
           display: flex;
           justify-content: space-between;
           padding-bottom:4px;
+          .tag-wrapper {
+            width:50vw;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
           .tag{ font-size:18px;}
           .amount{
             color:#08d223;

@@ -29,7 +29,6 @@ import logo from "../assets/icons/mangosteen.svg";
 import { useRoute, useRouter } from "vue-router";
 import { useSwipe } from "../hooks/useSwipe";
 import {ref ,watch} from "vue";
-import storage from '../utils/storage' 
 const route = useRoute();
 const router = useRouter();
 const nextPageClick = () => {
