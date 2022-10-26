@@ -52,6 +52,8 @@ import { Toast } from 'vant';
 import 'vant/es/toast/style';
 import { Notify } from 'vant';
 import 'vant/es/notify/style';
+import { Dialog } from 'vant';
+import 'vant/es/dialog/style';
 
 const route = useRoute()
 const router = useRouter()
@@ -120,20 +122,25 @@ const onSubmit = async (e:Event) => {
   } 
 }
 // 删除标签
-const deleteTagClick = async (e:Event) => {
+const deleteTagClick = (e: Event) => {
   e.preventDefault()
-  try {
+  Dialog.confirm({
+  title: '提示',
+  message:
+    '确定要删除吗?',
+})
+  .then(async () => {
+    try {
     await deleteTag(tag_id)
     router.push('/item/create')
     Toast.success('删除成功')
   } catch (err) {
     console.log(err)
   }
-}
-// 删除标签和有关账单
-const deleteTagAndList = (e:Event) => {
-  e.preventDefault()
-  
+  })
+  .catch(() => {
+    console.log('取消')
+  });
 }
 </script>
 <style lang="scss" scoped>
