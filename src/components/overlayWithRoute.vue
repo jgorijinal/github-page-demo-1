@@ -1,7 +1,19 @@
 <template>
   <overlay :visible="overlayVisible" @closeOverlay="onClose">
     <ul class="menu-nav">
-        <li class="menu-nav-item">
+      <li class="menu-nav-item" @click="$router.push('/start')">
+          <img :src="startSvg" alt="">
+          <span>首页</span>
+        </li>  
+        <li class="menu-nav-item" @click="$router.push('/item/create')">
+          <img :src="jizhangSvg" alt="">
+          <span>记一笔账</span>
+        </li> 
+        <li class="menu-nav-item"  @click="$router.push('/item/list')">
+          <img :src="listSvg" alt="">
+          <span>账单列表</span>
+        </li>  
+      <li class="menu-nav-item"  @click="$router.push('/statistics')">
           <img :src="tongjiSvg" alt="">
           <span>统计图表</span>
         </li>
@@ -25,10 +37,10 @@ import tongjiSvg from '../assets/icons/tongji.svg'
 import fenleiSvg from '../assets/icons/fenlei.svg'
 import exportSvg from '../assets/icons/export.svg'
 import tixingSvg from '../assets/icons/tixing.svg'
+import startSvg from '../assets/icons/start.svg'
+import listSvg from '../assets/icons/list.svg'
+import jizhangSvg from '../assets/icons/jizhang.svg'
 import overlay from './overlay.vue'
-
-import { ref } from 'vue'
-import { emit } from 'process'
 
 const props = defineProps({
   overlayVisible: {

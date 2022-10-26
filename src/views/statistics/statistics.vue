@@ -1,7 +1,7 @@
 <template>
-  <nav-bar title="统计图标" @clickLeft="$router.back()">
+  <nav-bar left-text="统计图标" @clickLeft="overlayVisible = true">
     <template #leftIcon>
-      <img :src="fanhuiSvg" alt="" class="fanhui">
+      <img :src="menuSvg" alt="" class="left-icon-img">
     </template>
   </nav-bar>
   <div class="container-wrapper">
@@ -22,18 +22,21 @@
     </tab>
   </tabs>
   </div>
+  <overlay-with-route :overlayVisible="overlayVisible" @close-overlay="overlayVisible = false"/>
 </template>
 <script lang="ts" setup>
-import fanhuiSvg from '../../assets/icons/fanhui.svg'
+import menuSvg from '../../assets/icons/menu.svg'
 import NavBar from '../../components/navBar.vue'
 
 import tabs from '../../components/tabs.vue'
 import tab from '../../components/tab.vue'
 import datePicker from '../../components/datePicker.vue'
 import charts from './components/charts.vue'
-
+import overlayWithRoute from '../../components/overlayWithRoute.vue'
 import { getThisMonth,getLastMonth,getThisYear } from '../../utils/dateCalc'
 import { ref } from 'vue';
+// 左侧菜单显示/隐藏
+const overlayVisible = ref(false)
 // 标签页激活项
 const activeName = ref('本月')
 // 自定义日期

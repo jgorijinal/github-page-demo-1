@@ -1,5 +1,5 @@
 <template>
-  <nav-bar leftText="日常记账" @clickLeft="overlayVisible = true">
+  <nav-bar leftText="账单列表" @clickLeft="overlayVisible = true">
     <template #leftIcon >
       <img :src="menuSvg" alt="" class="left-icon-img">
     </template>

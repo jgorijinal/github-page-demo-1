@@ -1,11 +1,12 @@
 <template>
   <div>
     <!--导航栏-->
-    <nav-bar title="记一笔" @click-left="leftClickHandle">
+    <nav-bar left-text="记一笔账" @click-left="overlayVisible = true">
       <template #leftIcon>
-        <img :src="fanhuiSvg" alt="">
+        <img :src="menuSvg" alt="" class="left-icon-img">
       </template>
     </nav-bar>
+    <overlay-with-route :overlayVisible="overlayVisible" @close-overlay="overlayVisible = false"/>
   <!--标签栏-->
     <tabs v-model:active="activeName">
       <tab name="支出">
@@ -67,8 +68,9 @@ import navBar from '../../components/navBar.vue'
 import tabs from '../../components/tabs.vue'
 import tab from '../../components/tab.vue'
 import inputPad from '../../components/inputPad.vue'
+import overlayWithRoute from '../../components/overlayWithRoute.vue'
 // svg
-import fanhuiSvg from '../../assets/icons/fanhui.svg'
+import menuSvg from '../../assets/icons/menu.svg'
 import add2Svg from '../../assets/icons/add2.svg'
 import { Toast } from 'vant';
 import 'vant/es/toast/style';
@@ -79,9 +81,9 @@ import { useRouter } from 'vue-router'
 
 import { getTags } from '../../api/tags'
 const router = useRouter()
-const leftClickHandle = () => {
-  router.back()
-}
+// 左侧菜单显示/隐藏
+const overlayVisible = ref(false)
+
 const activeName = ref('支出')
 const expensesTags = ref<any>([])
 const incomeTags = ref<any>([])

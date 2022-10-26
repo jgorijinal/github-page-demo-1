@@ -56,10 +56,8 @@ const getAllItems = async () => {
   })
   const { resources, pager } = res
   items.value = resources
-  console.log(pager.count, pager.per_page )
   if (pager.count === pager.per_page) {
     pageCount.value +=  1
-    console.log(pageCount.value)
   }
   } catch (err) {
   console.log(err)
