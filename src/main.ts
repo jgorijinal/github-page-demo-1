@@ -4,6 +4,10 @@ import router from './router/index'
 import './assets/stylesheets/reset.scss'
 import '@svgstore';
 import './permission'
+import { createPinia } from 'pinia'
+
+
 const app = createApp(App)
 app.use(router)
+app.use(createPinia())
 app.mount('#app')

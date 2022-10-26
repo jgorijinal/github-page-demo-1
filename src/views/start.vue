@@ -31,7 +31,7 @@ import FloatButton from '../components/floatButton.vue'
 import OverlayWithRoute from '../components/OverlayWithRoute.vue'
 
 import { ref } from 'vue'
-import { useRouter} from 'vue-router'
+import { useRouter } from 'vue-router'
 const router = useRouter()
 const handleClick = () => {
   router.push('/item/create')

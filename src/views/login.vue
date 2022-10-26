@@ -52,6 +52,7 @@ import { Toast } from 'vant';
 import 'vant/es/toast/style';
 import { useRouter,useRoute } from 'vue-router'
 import storage from '../utils/storage'
+import { useStore } from '../store'
 // 表单数据
 const formData = reactive({
   email: '',
@@ -93,8 +94,10 @@ const onSendCode = () => {
 const router = useRouter()
 const route = useRoute()
 const loginLoading = ref(false)
+
+const store = useStore()
 // 点击最终登录按钮
-const onSubmit = async (val: any) => {
+const onSubmit = async () => {
   // 1. 整个表单校验 (Vant自动会做校验)
   // 2. 发登录请求
   Toast.loading({
@@ -104,22 +107,15 @@ const onSubmit = async (val: any) => {
   });
   loginLoading.value = true
   try {
-    // TODO : 有点别扭, 没有用状态管理 !!! 
-    const res = await login(formData)
-    // console.log(res)
-    storage.setItem('jwt', res.jwt)
+    // TODO : 有点别扭, 没有用状态管理 !!!
+    // const res = await login(formData)
+    // storage.setItem('jwt', res.jwt)
     
+    //调用了 pinia的 loginAction
+    store.loginAction(formData)
+
     Toast.success("登录成功");
     loginLoading.value = false
-
-    // 跳转到原来的页面(使用了 query)
-    const redirectRoute = route.query.redirectRoute
-    // console.log(redirectRoute)
-    if (redirectRoute) {
-      router.push(decodeURIComponent(redirectRoute as string))
-    } else {
-      router.push('/start')
-    }
   } catch (err:any) {
     if (err.response.status === 422) {
       Toast.fail("验证码不正确, 请重新输入");
