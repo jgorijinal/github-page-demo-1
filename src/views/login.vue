@@ -30,6 +30,7 @@
       label="邮箱验证码"
       placeholder="请输入收到的验证码"
       :rules="formRules.code"
+      ref="codeInputRef"
     >
     <template #button>
       <van-count-down :time="60* 1000" format="ss 秒" v-if="countDownVisible" @finish="countDownVisible = false"/>
@@ -71,8 +72,11 @@ const formRules = {
 
 // 表单的实例
 const formRef = ref(null)
+// 验证码输入框实例
+const codeInputRef = ref(null)
 // 发送验证码
 const onSendCode = () => {
+    // 验证码输入框获取焦点
     // 校验邮箱, 然后发送验证码
     (formRef.value as any).validate('email').then(async () => {
       countDownVisible.value = true
@@ -83,7 +87,8 @@ const onSendCode = () => {
     }).catch(() => {
       // 校验不通过 
       console.log('校验不通过')
-  })
+    })
+    codeInputRef.value!.focus()
 }
 const router = useRouter()
 const route = useRoute()
@@ -124,7 +129,7 @@ const onSubmit = async (val: any) => {
     loginLoading.value = false
   }
 }
-console.log(router.currentRoute.value.fullPath)
+
 </script>
 <style lang="scss" scoped>
   .eren-login {
