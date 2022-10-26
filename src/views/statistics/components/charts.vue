@@ -10,10 +10,14 @@
     </select>
     </div>
     <!--图表-->
-    <line-echart :x-labels="xLabels" :values="values"></line-echart>
-    <pie-echart :pie-data="pieData"/>
+    <line-echart :x-labels="xLabels" :values="values" v-if="hasItems"></line-echart>
+    <pie-echart :pie-data="pieData" v-if="hasItems"/>
     <!--进度条-->
-    <progress-bar :data="items"/> 
+    <progress-bar :data="items" v-if="hasItems"/> 
+    <div class="chart-tip" v-if="!hasItems">
+      <div>先去记一笔账哦</div>
+    <div>目前还没有账单</div>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -21,10 +25,11 @@ import lineEchart from './LineEchart.vue'
 import pieEchart from './pieEchart.vue'
 import progressBar from './progressBar.vue'
 import { getItemsByGroup } from '../../../api/items'
-import { ref, watch,computed } from 'vue'
+import { ref, watch,computed,nextTick } from 'vue'
 import { Toast } from 'vant';
 import 'vant/es/toast/style'
-
+import { Notify } from 'vant';
+import 'vant/es/notify/style';
 // 开始时间, 结束时间, 支出/收入类型 v-model 绑定
 interface chartsProps {
   startDate: string
@@ -40,6 +45,14 @@ const selectChange = (e:any) => {
   emits('update:modelValue', e.target.value)
 }
 const items = ref<any>([])
+const hasItems = computed(() => {
+  return Boolean(JSON.stringify(items.value) !== '[]')
+})
+setTimeout(() => {
+    if (!hasItems.value) {
+      Notify({ type: 'warning', message: '先去记一笔账哦~ 目前还没有账单' });
+}
+},1000)
 const totalAmount= ref(0)
 // 获取账单列表
 const getItems = async () => {
@@ -92,6 +105,14 @@ watch(() => props.endDate, () => {
 </script>
 <style lang="scss" scoped>
 .eren-chart-container{
+  .chart-tip{
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    font-size:20px;
+    color:gray;
+  }
     // padding:8px;
   .eren-chart-select{
     padding: 20px 0 0 8px;

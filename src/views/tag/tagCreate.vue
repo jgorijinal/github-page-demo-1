@@ -35,8 +35,7 @@
       </div>
     </div>
     <div class="action-buttons" v-if="isEdit">
-      <e-button class="action" @click="deleteTagClick">删除标签</e-button>
-      <e-button class="action" @click="deleteTagAndList">删除标签和对应的记账</e-button>
+      <e-button class="action" @click="deleteTagClick">删除标签和对应账单</e-button>
     </div>
   </form>
 </template>
@@ -96,7 +95,7 @@ if (isEdit.value) {
 
 //表单提交
 const onSubmit = async (e:Event) => {
-  // e.preventDefault()
+  e.preventDefault()
   errors.value = validate<FormData>(formData, rules)
   if (JSON.stringify(errors.value) === '{}') {
     // 没有错误, 可以点击确定按钮
@@ -191,9 +190,6 @@ img {
   display: flex;
   .action {
     flex-grow: 1;
-    &:first-child{
-      margin-right:10px;
-    }
      .eren-button {
       background-color: #e10405;
       border:1px solid #e10405;
