@@ -84,6 +84,11 @@ const pieData = computed(() => {
     }
   })
 })
+
+// 日期改变
+watch(() => props.endDate, () => {
+  getItems()
+})
 </script>
 <style lang="scss" scoped>
 .eren-chart-container{

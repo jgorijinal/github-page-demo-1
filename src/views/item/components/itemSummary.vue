@@ -14,7 +14,7 @@
         <div class="text">
           <div class="tagAndAmount">
             <span class="tag">{{item.tags[0].name}}</span>
-            <span class="amount" :class="{isExpenses:item.kind === 'expenses'}">{{item.amount}}</span>
+            <span class="amount" :class="{isExpenses:item.kind === 'expenses'}">{{item.amount}} 元</span>
           </div>
           <div class="time">
             <span>{{item.kind === 'income' ? '收入' : '支出'}}</span>
