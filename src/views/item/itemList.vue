@@ -46,6 +46,7 @@ const customDate = ref({
 
 const dateChanged = (x:any) => {
   customDate.value = x
+  console.log(customDate.value)
 }
 
 

@@ -22,36 +22,64 @@
         </div>
       </li>
     </ul>
+    <!-- <van-pagination
+  v-model="page"
+  :total-items="total"
+  :show-page-size="2"
+  force-ellipses
+  :items-per-page="10"
+  @change="getAllItems"
+/> -->
+<van-pagination v-model="page" :page-count="pageCount" mode="simple"   @change="getAllItems"/>
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref,watch } from 'vue'
 import { getItems } from '../../../api/items'
 import formatDate from '../../../utils/formatDate'
-import dayjs from 'dayjs'
+import { Toast } from 'vant';
+import 'vant/es/toast/style';
+
 interface ItemSummaryProps {
   startDate: string
   endDate:string
 }
 const props = defineProps<ItemSummaryProps>()
 
-const page = ref(0)
-const hasMore = ref(false)
+const page = ref(1)
 const items = ref<any>([])
+const pageCount = ref(1)
 const getAllItems = async () => {
-  const res = await getItems({
-    created_after: dayjs(props.startDate).toDate(),
-    created_before: dayjs(props.endDate).toDate(),  
-    page:page.value + 1
+  const toast1 = Toast.loading({
+  duration: 0, // 持续展示 toast
+  message: "加载中...",
+  forbidClick: true // 是否禁止背景点击
+  });
+  try {
+    const res = await getItems({
+    created_after: props.startDate,
+    created_before: props.endDate,
+    page: page.value,
   })
   const { resources, pager } = res
-  items.value.push(...resources)
-  hasMore.value = (pager.page - 1) * pager.per_page + resources.length < pager.count
-  console.log(items.value)
-  console.log(hasMore.value)
+  items.value = resources
+  console.log(pager.count, pager.per_page )
+  if (pager.count === pager.per_page) {
+    pageCount.value +=  1
+    console.log(pageCount.value)
+  }
+  } catch (err) {
+  console.log(err)
+  }
+  toast1.clear()
 }
 getAllItems()
-console.log(dayjs(props.startDate).toDate())
+watch(() => {
+  return props.endDate
+}, () => {
+  getAllItems()
+})
+
 </script>
 <style lang="scss" scoped>
 .item-summary{
