@@ -1,9 +1,9 @@
 <template>
   <div class="item-summary">
     <ul class="item-summary-total">
-      <li><span>收入</span><span>128</span></li>
-      <li><span>支出</span><span>100</span></li>
-      <li><span>净收入</span><span>28</span></li>
+      <li><span>收入</span><span>{{incomeValues || ''}}</span></li>
+      <li><span>支出</span><span>{{expensesValues  || ''}}</span></li>
+      <li><span>净收入</span><span>{{profit  || ''}}</span></li>
     </ul>
     <div class="tips" v-if="items.length === 0">目前还没有记录</div>
     <ul class="item-summary-list">
@@ -27,11 +27,12 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref,watch } from 'vue'
+import { ref,watch, computed } from 'vue'
 import { getItems } from '../../../api/items'
 import formatDate from '../../../utils/formatDate'
 import { Toast } from 'vant';
 import 'vant/es/toast/style';
+import exp from 'constants';
 
 interface ItemSummaryProps {
   startDate: string
@@ -55,7 +56,8 @@ const getAllItems = async () => {
     page: page.value,
   })
   const { resources, pager } = res
-  items.value = resources
+    items.value = resources
+    console.log(items.value)
   if (pager.count === pager.per_page) {
     pageCount.value +=  1
   }
@@ -71,6 +73,30 @@ watch(() => {
   getAllItems()
 })
 
+// 总支出
+const expensesValues = computed(() => {
+  let expensesTotal = 0
+  items.value.forEach(item => {
+    if (item.kind == "expenses") {
+      expensesTotal += item.amount
+    }
+  })
+  return expensesTotal
+})
+// 总收入
+const incomeValues = computed(() => {
+  let incomeTotal = 0
+  items.value.forEach(item => {
+    if (item.kind == "income") {
+      incomeTotal += item.amount
+    }
+  })
+  return incomeTotal
+})
+// 利润
+const profit = computed(() => {
+  return incomeValues.value - expensesValues.value
+})
 </script>
 <style lang="scss" scoped>
 .item-summary{
