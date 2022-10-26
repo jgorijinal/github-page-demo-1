@@ -1,19 +1,19 @@
 <template>
   <overlay :visible="overlayVisible" @closeOverlay="onClose">
     <ul class="menu-nav">
-      <li class="menu-nav-item" @click="$router.push('/start')">
+      <li class="menu-nav-item" @click="$router.push('/start')" :class="{selected:$route.path === '/start'}">
           <img :src="startSvg" alt="">
           <span>首页</span>
         </li>  
-        <li class="menu-nav-item" @click="$router.push('/item/create')">
+        <li class="menu-nav-item" @click="$router.push('/item/create')" :class="{selected:$route.path === '/item/create'}">
           <img :src="jizhangSvg" alt="">
           <span>记一笔账</span>
         </li> 
-        <li class="menu-nav-item"  @click="$router.push('/item/list')">
+        <li class="menu-nav-item"  @click="$router.push('/item/list')" :class="{selected:$route.path === '/item/list'}">
           <img :src="listSvg" alt="">
           <span>账单列表</span>
         </li>  
-      <li class="menu-nav-item"  @click="$router.push('/statistics')">
+      <li class="menu-nav-item"  @click="$router.push('/statistics')" :class="{selected:$route.path === '/statistics'}">
           <img :src="tongjiSvg" alt="">
           <span>统计图表</span>
         </li>
@@ -68,7 +68,7 @@ const onClose = () => {
     padding:8px 10px;
     transition: all 0.25s ease;
     cursor:pointer;
-    &:hover,&:active {
+    &:hover,&:active,&.selected {
       background-color: antiquewhite;
     }
     img{
