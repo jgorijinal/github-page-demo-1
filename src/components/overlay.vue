@@ -16,6 +16,7 @@
   </transition>
 </template>
 <script setup lang="ts">
+import { useStore } from '../store'
 export interface OverlayProps {
   visible:boolean
 }
@@ -26,6 +27,9 @@ const emits = defineEmits(['closeOverlay'])
 const clickOverlay = () => {
   emits('closeOverlay')
 }
+// -- 退出登录逻辑 ---- 
+const store = useStore()
+
 
 </script>
 <style lang="scss" scoped>
