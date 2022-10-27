@@ -20,7 +20,7 @@
     />
     <van-popup v-model:show="dateStartPickerVisible" position="bottom">
       <van-datetime-picker
-          :value="startDate"
+          :modelValue="new Date()"
           type="date"
           title="请选择年月日"
           @confirm = "dateStartConfirm"
