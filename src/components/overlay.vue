@@ -5,9 +5,13 @@
     <div class="eren-overlay-mask" @click="clickOverlay"></div> 
     <!--内容-->
     <div class="eren-overlay-content">
-      <section class="eren-overlay-content-login">
-          <span class="text-login1">未登录用户</span>
+      <section class="eren-overlay-content-login" v-if="!hasToken" @click="$router.push('/login')">
+          <span class="text-login1" >未登录用户</span>
           <span class="text-login2">点击此处登录</span> 
+      </section>
+      <section class="eren-overlay-content-login" v-if="hasToken" @click="logoutClick">
+          <span class="text-login1" >{{store.userInfo.email}}</span>
+          <span class="text-login2">点击即可退出登录</span> 
       </section>
       <!--插槽-->
         <slot></slot>
@@ -17,6 +21,12 @@
 </template>
 <script setup lang="ts">
 import { useStore } from '../store'
+import { ref, computed } from 'vue'
+import { Toast } from 'vant';
+import 'vant/es/toast/style';
+import { Dialog } from 'vant';
+import 'vant/es/dialog/style';
+
 export interface OverlayProps {
   visible:boolean
 }
@@ -29,7 +39,24 @@ const clickOverlay = () => {
 }
 // -- 退出登录逻辑 ---- 
 const store = useStore()
-
+const logoutClick = () => {
+  Dialog.confirm({
+  title: '提示',
+  message:
+    '确定要退出登陆吗?',
+})
+  .then(() => {
+    store.logoutAction()
+    Toast.success("已退出登录");
+  })
+  .catch(() => {
+    console.log('取消退出登录')
+  });
+}
+// 登陆了吗?
+const hasToken = computed(() => {
+  return Boolean(store.token)
+})
 
 </script>
 <style lang="scss" scoped>
@@ -60,6 +87,8 @@ const store = useStore()
       flex-direction: column;
       .text-login1{
         font-size:20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .text-login2{
         margin-top:16px;
