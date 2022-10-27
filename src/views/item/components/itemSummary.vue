@@ -52,8 +52,8 @@ const getAllItems = async () => {
   });
   try {
     const res = await getItems({
-    created_after: props.startDate,
-    created_before: props.endDate,
+      happen_before: props.endDate,
+      happen_after: props.startDate,
     page: page.value,
   })
   const { resources, pager } = res

@@ -50,7 +50,7 @@ const hasItems = computed(() => {
 })
 setTimeout(() => {
     if (!hasItems.value) {
-      Notify({ type: 'warning', message: '先去记一笔账哦~ 目前还没有账单' });
+      Notify({ type: 'warning', message: '先去记一笔账哦~ 目前还没有账单' ,duration: 1500});
 }
 },1000)
 const totalAmount= ref(0)
@@ -63,8 +63,8 @@ const getItems = async () => {
   });
   try {
     const { groups, total } = await getItemsByGroup({
-    happened_after: props.startDate,
-    happened_before: props.endDate,
+    happen_after: props.startDate,
+    happen_before: props.endDate,
     kind: props.modelValue,
     group_by: 'tag_id'
   })
