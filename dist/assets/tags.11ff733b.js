@@ -1,1 +1,0 @@
-import{a7 as a}from"./index.965bee98.js";function g(t){return a.get("/tags",t)}function r(t){return a.post("/tags",t)}function s(t){return a.get(`/tags/${t}`)}function o(t,e){return a.patch(`/tags/${t}`,e)}function u(t){return a.delete(`/tags/${t}`)}export{s as a,r as c,u as d,o as e,g};

@@ -1,1 +1,0 @@
-import{C as u}from"./card.64b866f6.js";import{d as e,o as t,c as a,u as o}from"./index.965bee98.js";var r="/github-page-demo-1/dist/assets/clock.a7d8dc5a.svg";const p=e({__name:"third",setup(s){return(c,n)=>(t(),a(u,{"img-src":o(r),"text-up":"\u6BCF\u65E5\u63D0\u9192","text-down":"\u4E0D\u9057\u6F0F\u6BCF\u4E00\u7B14\u8D26\u5355"},null,8,["img-src"]))}});export{p as default};

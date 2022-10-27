@@ -1,0 +1,1 @@
+import{C as r}from"./card.22fa33df.js";import{p as u}from"./pig.4445e8e2.js";import{d as t,o as e,c as o,u as s}from"./index.1104e249.js";const f=t({__name:"first",setup(a){return(n,p)=>(e(),o(r,{"img-src":s(u),"text-up":"\u4F60\u4F1A\u7701\u94B1","text-down":"\u4F60\u8FD8\u8981\u4F1A\u7701\u94B1"},null,8,["img-src"]))}});export{f as default};

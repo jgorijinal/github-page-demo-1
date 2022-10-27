@@ -13,9 +13,12 @@
       <span>点击下方 ↓ 按钮可以随时记账</span>
     </div>
     <!--记账按钮-->
-    <e-button class="button" @click="handleClick">开始记账</e-button>
+    <!-- <e-button class="button" @click="handleClick">开始记账</e-button> -->
+    <div class="button" >
+      <van-button type="primary" block @click="handleClick" color="#3465e0">开始记账</van-button>
+    </div>
     <!--悬浮按钮-->
-    <float-button />
+    <!-- <float-button /> -->
     <!--遮罩层-->
     <overlay-with-route :overlayVisible="overlayVisible" @close-overlay="closeOverlayHandle"/>
   </div>
@@ -56,7 +59,7 @@ const closeOverlayHandle = () => {
   height:100vh;
 }
 .button {
-  display: block;
+  // display: block;
   margin:10px;
 }
 .left-icon-img {
