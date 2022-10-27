@@ -106,7 +106,7 @@ const onSubmit = async () => {
   forbidClick: true // 是否禁止背景点击
   });
   loginLoading.value = true
-  try {
+
     // TODO : 有点别扭, 没有用状态管理 !!!
     // const res = await login(formData)
     // storage.setItem('jwt', res.jwt)
@@ -114,16 +114,7 @@ const onSubmit = async () => {
     //调用了 pinia的 loginAction
     store.loginAction(formData)
 
-    Toast.success("登录成功");
     loginLoading.value = false
-  } catch (err:any) {
-    if (err.response.status === 422) {
-      Toast.fail("验证码不正确, 请重新输入");
-    } else {
-      Toast.fail("登录失败, 请稍后重试");
-    }
-    loginLoading.value = false
-  }
 }
 
 </script>

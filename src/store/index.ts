@@ -3,6 +3,8 @@ import { login } from '../api/login'
 import storage from '../utils/storage'
 import router from '../router'
 import { getUserInfo } from '../api/login'
+import { Toast } from 'vant';
+import 'vant/es/toast/style';
 export const useStore = defineStore('main', {
   state: () => {
     return {
@@ -24,8 +26,13 @@ export const useStore = defineStore('main', {
         } else {
           router.push('/start')
         }
-      } catch (err) {
-        console.log(err)
+        Toast.success("登录成功");
+      } catch (err:any) {
+        if (err.response.status === 422) {
+          Toast.fail("验证码不正确, 请重新输入");
+        } else {
+          Toast.fail("登录失败, 请稍后重试");
+        }
       }
     },
     // 调用时机?  
