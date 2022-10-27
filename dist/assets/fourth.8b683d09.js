@@ -1,0 +1,1 @@
+import{C as u}from"./card.64b866f6.js";import{d as t,o as e,c as r,u as a}from"./index.965bee98.js";var s="/github-page-demo-1/dist/assets/chart.20ea6dd9.svg";const d=t({__name:"fourth",setup(o){return(c,n)=>(e(),r(u,{"img-src":a(s),"text-up":"\u6BCF\u65E5\u63D0\u9192","text-down":"\u4E0D\u9057\u6F0F\u6BCF\u4E00\u7B14\u8D26\u5355"},null,8,["img-src"]))}});export{d as default};

@@ -26,7 +26,7 @@ export default class Http {
   }
 }
 
-export const http = new Http('/api/v1')
+export const http = new Http('http://121.196.236.94:8080/api/v1')
 
 http.instance.interceptors.request.use((config) => {
   // 请求头统一注入 token

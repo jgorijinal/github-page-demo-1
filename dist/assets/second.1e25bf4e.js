@@ -1,0 +1,1 @@
+import{C as u}from"./card.64b866f6.js";import{d as e,o,c as s,u as t}from"./index.965bee98.js";var r="/github-page-demo-1/dist/assets/cloud.926d216e.svg";const p=e({__name:"second",setup(a){return(c,n)=>(o(),s(u,{"img-src":t(r),"text-up":"\u6BCF\u65E5\u63D0\u9192","text-down":"\u4E0D\u9057\u6F0F\u6BCF\u4E00\u7B14\u8D26\u5355"},null,8,["img-src"]))}});export{p as default};

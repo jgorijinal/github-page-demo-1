@@ -1,0 +1,1 @@
+import{_ as t,o as s,a,b as n,l as r,n as o}from"./index.965bee98.js";const _={},c={class:"eren-button"};function d(e,l){return s(),a("div",{class:o([e.$attrs,"eren-button-wrapper"])},[n("button",c,[r(e.$slots,"default",{},void 0,!0)])],2)}var p=t(_,[["render",d],["__scopeId","data-v-10fdb063"]]);export{p as E};
