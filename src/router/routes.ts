@@ -57,5 +57,9 @@ export const routes: RouteRecordRaw[] = [
     path: '/statistics',
     name: 'statistics',
     component: () => import('../views/statistics/statistics.vue')
+  },
+  {
+    path: '/:pathMatch(.*)',
+    component:()=>import('../views/404.vue')
   }
 ]
