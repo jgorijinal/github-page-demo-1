@@ -2,6 +2,7 @@ import router from './router'
 import storage from './utils/storage'
 import { Toast } from 'vant';
 import 'vant/es/toast/style';
+import { useStore } from './store';
 
 const whiteList = ['/welcome','/welcome/1','/welcome/2','/welcome/3','/welcome/4','/login','/start']
 router.beforeEach((to, from, next) => {
@@ -10,6 +11,11 @@ router.beforeEach((to, from, next) => {
     if (to.path === '/login') {
       next('/start')
     } else {
+      // 获取当前用户信息
+      const store = useStore()
+      if(JSON.stringify(store.userInfo) === '{}'){
+        store.getUserInfoAction()
+      }
       next()
     }
   } else {
